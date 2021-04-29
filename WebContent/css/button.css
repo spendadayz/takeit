@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+/*button*/
+.link{
+	text-align: center;
+	display: block;
+	margin: 5px auto 0 auto;
+	width: 300px;
+	height: 30px;
+	font-size:15px;
+	font-weight: 500;
+	color: #35363a;
+	border: solid 1px #8D959C;
+	background-color: #fff;
+}
+.link:hover{
+	background-color: #5a7d59;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+#to-top{
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	cursor: pointer;
+	height: 35px;
+}
+#to-top:hover{
+	opacity: 0.35;
+}
+#small-btn{
+	width: 1050px;
+	text-align: right;
+}
+#small-btn>a{
+	border: solid 1px #8D959C;
+	color: #000;
+	text-decoration: none;
+	padding: 7px 25px 7px 25px;
+}
+#small-btn>a:hover{
+	background-color: #5a7d59;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}

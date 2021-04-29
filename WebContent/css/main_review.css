@@ -1,0 +1,32 @@
+@charset "UTF-8";
+#best-review{
+	display: flex;
+}
+#best-review>ul{
+	list-style: none;
+}
+#best-review>ul:first-child{
+	padding-left: 0;
+}
+#review-img{
+	width: 250px;
+	height: 320px;
+}
+#review-img:hover{
+	-webkit-transform: scale(1.05);
+	transform: scale(1.05);
+}
+#reviewTitle{
+	
+}
+#reviewTitle:hover{
+	font-weight: 600;
+	color: #5a7d59;
+	cursor: pointer;
+}
+#reviewWriter{
+	
+}
+#review{
+	color: gray;
+}

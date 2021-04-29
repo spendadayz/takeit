@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+#drop-menu{
+	width: 1050px;
+	margin: 0 auto;
+	font-size: 14px;
+	color: #555;
+	z-index: 1;
+}
+.sub-nav{
+	list-style: none;
+	padding-inline-start : 0px;
+}
+.sub-nav>li{
+	line-height: 40px;
+	font-size: 20px;
+	width: fit-content;
+}
+.sub-nav>li>a{
+	color: black;
+}
+.sub-nav>li>a:hover{
+	font-weight: 700;
+	color: #5a7d59;
+}

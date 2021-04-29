@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+#item-recomm{
+	display: flex;
+}
+#item-recomm>ul {
+    list-style: none;
+}
+#item-recomm>ul:first-child{
+	padding-left: 0;
+}
+#itemImg{
+	width: 250px;
+	height: 320px;
+}
+#itemImg:hover{
+	-webkit-transform: scale(1.05);
+	transform: scale(1.05);
+}
+#itemTitle {
+	
+}
+#itemTitle:hover {
+	font-weight: 600;
+	color: #5a7d59;
+	cursor: pointer;
+}
+#discRate {
+	color: red;
+	font-weight: 600;
+	display: inline-block;
+}
+#salePrice {
+	display: inline-block;
+	font-weight: 600;
+}
+#price {
+	text-decoration: line-through;
+	color: gray;
+}
