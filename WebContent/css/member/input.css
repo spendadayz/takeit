@@ -1,0 +1,276 @@
+@charset "UTF-8";
+
+#contents_box {	
+	margin: auto;
+}
+	
+#contents_box > table {		
+	/* font-size: 9px; */
+}
+
+#contents_box > p {	
+	/* font-size: 9px; */
+}
+
+/* 일반회원가입 폼 */
+#nomal_inputForm{
+	width: 315px;
+	height: 60px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	background-color: #7B977A;
+	color: white;
+	margin-top: 15px;
+	border: 1px solid #7B977A;
+	cursor: pointer;
+}
+
+/* 일반회원 데이터 시작*/
+#memberId{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#id_button{
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+	color: white;
+	background: #7B977A;
+	cursor: pointer;
+}
+
+#memberPw{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#pwChk{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#pwCheckbox{
+	background: #7B977A;
+}
+
+#name{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#email{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#email_button{
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+	color: white;
+	background: #7B977A;
+	cursor: pointer;
+}
+
+#mobile{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+	
+}
+
+#mobileNum{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+	
+}
+
+#mobile_button{
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+	color: white;
+	background: #7B977A;
+	cursor: pointer;
+}
+
+#postNo{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+	
+}
+
+#postNoBtn{
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+	color: white;
+	background: #7B977A;
+	cursor: pointer;
+}
+
+#address{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#addressDetail{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#brith{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#normal_submit{
+	width:50%;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	background-color: #7B977A;
+	color: white;
+	border: 1px solid #7B977A;
+	margin-top: 10px;	
+	cursor: pointer;
+}
+/* 일반회원 데이터 끝*/
+
+/* 판매자 회원가입  폼 */
+#seller_inputForm{
+	width: 315px;
+	height: 60px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	background-color: #7B977A;
+	color: white;
+	border: 1px solid #7B977A;
+	margin-top: 20px;
+	cursor: pointer;
+}
+
+/* 판매자회원 데이터 시작*/
+#sellerId{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#sellerPw{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#sellerPw_chk{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#sellerNo{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#shopMobile{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#shopName{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#shopKakaoId{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#shopImg{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#shopCategoryNo{
+	width:290px;
+	height:37px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#sellerSubmit{
+	width:50%;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	background-color: #7B977A;
+	color: white;
+	border: 1px solid #7B977A;
+	margin-top: 10px;	
+	cursor: pointer;
+}
+/* 판매자회원 데이터 끝*/
+
+

@@ -10,24 +10,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 </head>
 <body>
+일반로그인세션  확인 : ${memberId }<br>
+판매자로그인세션  확인 : ${sellerId }
 <!-- 상단 메뉴 -->
-<c:choose>
-	<c:when test="${empty memberId or empty grade}">
-		<!-- 로그인 전 메뉴 -->
-		<jsp:include page="/common/before_login_menu.jsp"></jsp:include>
-	</c:when>
-	<c:otherwise>
-		<!-- 로그인 후 메뉴 -->
-		<jsp:include page="/common/after_login_menu.jsp"></jsp:include>	
-	</c:otherwise>
-</c:choose>
+<c:if test="${empty memberId and empty sellerId}">
+	<!-- 로그인 전 메뉴 -->
+	<jsp:include page="/common/before_login_menu.jsp"></jsp:include>
+</c:if>
+<c:if test="${not empty memberId or not empty sellerId}">
+	<!-- 로그인 후 메뉴 -->
+	<jsp:include page="/common/after_login_menu.jsp"></jsp:include>	
+</c:if>
 <!-- logo.jsp 삽입 -->
 <jsp:include page="/common/logo.jsp"></jsp:include>
 <!-- 네비게이션 -->
 <jsp:include page="/common/navigation.jsp"></jsp:include>
 <!-- 메인배너 -->
-<section id="main-visual">
-	<div class="container">
+<section id="main-visual" class="view-width">
+	<div class="container" class="view-width">
 		<div class="inner">
 		<img alt="메인배너" src="/takeit/img/main/main1.jpg">
 		</div>
@@ -44,14 +44,14 @@
 		<img alt="메인배너" src="/takeit/img/main/main5.jpg">
 		</div>
 	</div>
-</secion>
-<div id="btn-wrap" class="view-width">
+<div id="btn-wrap">
 <button class="btn1">1</button>
 <button class="btn2">2</button>
 <button class="btn3">3</button>
 <button class="btn4">4</button>
 <button class="btn5">5</button>
 </div>
+</secion>
 <script type="text/javascript">
 document.querySelector(".btn2").addEventListener('click', function(){
 	document.querySelector('.container').style.transform = 'translate(-100vw)';
@@ -72,10 +72,13 @@ document.querySelector(".btn1").addEventListener('click', function(){
 </section>
 <!-- 상품추천 구역-->
 <h3 style="width:fit-content; margin: 20px auto; font-size: 30px;">이 상품 어때요?</h3>
+<div id="shortcut" class="view-width">
+<a href="/takeit/item/itemController?action=itemList">바로가기>></a>
+</div>
 <div id="item-recomm" class="view-width">
 <ul>
 	<li>
-		<a href="#">
+		<a href="/takeit/item/item1.jsp">
 		<img id="itemImg" alt="소불고기" src="/takeit/img/item/item1.jpg">
 		</a>
 	</li>
@@ -86,7 +89,7 @@ document.querySelector(".btn1").addEventListener('click', function(){
 </ul>
 <ul>
 	<li>
-		<a href="#">
+		<a href="/takeit/item/item2.jsp">
 		<img id="itemImg" alt="맛간장" src="/takeit/img/item/item2.jpg">
 		</a>
 	</li>
@@ -95,18 +98,18 @@ document.querySelector(".btn1").addEventListener('click', function(){
 </ul>
 <ul>
 	<li>
-		<a href="#">
+		<a href="/takeit/item/item3.jsp">
 		<img id="itemImg" alt="소불고기" src="/takeit/img/item/item3.jpg">
 		</a>
 	</li>
-	<li id="itemTitle">[상하목장]마이리틀 유기농 자먹는 요거트 3종</li>
+	<li id="itemTitle">[상하목장]마이리틀 유기농 짜먹는 요거트 3종</li>
 	<li id="discRate">26%</li>
 	<li id="salePrice">2,575원</li>
 	<li id="price">3,480원</li>
 </ul>
 <ul>
 	<li>
-		<a href="#">
+		<a href="/takeit/item/item4.jsp">
 		<img id="itemImg" alt="소불고기" src="/takeit/img/item/item4.jpg">
 		</a>
 	</li>
@@ -116,9 +119,11 @@ document.querySelector(".btn1").addEventListener('click', function(){
 	<li id="price">7,980원</li>
 </ul>
 </div>
-
 <!-- 후기 구역 -->
-<h3 style="width:fit-content; margin: 20px auto; font-size: 30px;">베스트후기</h3>
+<h3 style="width:fit-content; margin: 20px auto; font-size: 30px;">구매후기</h3>
+<div id="shortcut" class="view-width">
+<a href="/takeit/item/reviewController?action=reviewList">바로가기>></a>
+</div>
 <div id="best-review" class="view-width">
 <ul>
 	<li>

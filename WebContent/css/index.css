@@ -1,9 +1,6 @@
 @charset "UTF-8";
 
-#main-visual{
-	width: 2000px;
-	overflow: hidden;
-}
+
 .container {
 	width: 500vw;
 	transition : transform 0.5s;
@@ -15,11 +12,11 @@
 }
 
 .inner img {
-	width: 100%;
+	width: 90%;
 }
 #btn-wrap {
-	width: fit-content;
-    margin: 0 auto;
+	width: 100%;
+	text-align: center;
 }
 .btn1, .btn2, .btn3, .btn4, .btn5{
 	background-color: #fff;
@@ -31,4 +28,13 @@
 	font-weight: 700;
 	color: #5a7d59;
 	border: 1px dashed #5a7d59;
+}
+
+#shortcut>a{
+	float: right;
+	color: #4c4c4c;	
+}
+#shortcut>a:hover {
+	font-weight: 700;
+	color: #5a7d59;
 }

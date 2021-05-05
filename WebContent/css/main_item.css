@@ -10,18 +10,19 @@
 	padding-left: 0;
 }
 #itemImg{
-	width: 250px;
-	height: 320px;
+    width: 230px;
+    height: 300px;
+	
 }
 #itemImg:hover{
 	-webkit-transform: scale(1.05);
 	transform: scale(1.05);
+	box-shadow: 3px 3px grey;
 }
 #itemTitle {
-	
+	font-weight: 600;
 }
 #itemTitle:hover {
-	font-weight: 600;
 	color: #5a7d59;
 	cursor: pointer;
 }

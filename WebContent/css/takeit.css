@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+/**공통*/
+#takeitImg-wrap{
+	width: fit-content;
+}
+#takeitImg{
+	position:relative;
+	width: 230px;
+    height: 300px;
+}
+#takeitImg:hover{
+	-webkit-transform: scale(1.005);
+	transform: scale(1.005);
+	box-shadow: 3px 3px grey;
+} 
+/**takeit list*/
+.takeit_item_wrap{
+	width: 1050px;
+	justify-content: space-between;
+}
+.item-fresh{
+	display: block;
+    position: absolute;
+    margin-top: -35px;
+    margin-left: 139px;
+    font-weight: 700;
+    height: 31px;
+    width: 91px;
+    text-align: center;
+    line-height: 31px;
+    vertical-align: middle;
+    background-color: #a7a370;
+}
+.takeit-listTime{
+	margin-top: 15px;
+	padding: 0 5.5px;
+    position: absolute;
+    text-align: center;
+	font-weight: 700;
+	background-color: #a7a370;
+	z-index:1;
+}
+.takeit_item>li{
+	list-style: none;
+}
+
+.blink{
+	-webkit-animation:blink 0.5s ease-in-out infinite alternate; 
+	-moz-animation:blink 0.5s ease-in-out infinite alternate; 
+	animation:blink 0.5s ease-in-out infinite alternate;
+}
+@-webkit-keyframes blink{ 
+	0% {opacity:0.6;} 
+	100% {opacity:1;} 
+} 
+@-moz-keyframes blink{ 
+	0% {opacity:0.6;} 
+	100% {opacity:1;}
+} 
+@keyframes blink{ 
+	0% {opacity:0.6;} 
+	100% {opacity:1;} 
+}
+
+
+/**takeit detail*/
+.takeit_detail{
+	width: 1050px;
+	margin: 0 auto;
+}
+.takeit_detail_wrap{
+	width: 1050px;
+	display: flex;
+}
+.btn-area{
+	width: fit-content;
+	float: right;
+}
+.takeit-detailTime{
+	margin-top: 40px;
+    text-align: center;
+	font-weight: 700;
+	background-color: #a7a384;
+}
+.it_info{
+	line-height: 2;
+}

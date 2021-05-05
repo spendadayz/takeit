@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품문의</title>
+<title>takeit::검색결과</title>
 </head>
 <body>
 

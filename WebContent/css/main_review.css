@@ -9,8 +9,8 @@
 	padding-left: 0;
 }
 #review-img{
-	width: 250px;
-	height: 320px;
+    width: 230px;
+    height: 300px;
 }
 #review-img:hover{
 	-webkit-transform: scale(1.05);

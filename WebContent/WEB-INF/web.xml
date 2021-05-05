@@ -21,4 +21,8 @@
 	<exception-type>java.lang.Exception</exception-type> 
   	<location>/error/Exception.jsp</location>
   </error-page>
+  <context-param>
+  	<param-name>CONTEXT_PATH</param-name>
+  	<param-value>/takeit</param-value>
+  </context-param>
 </web-app>
