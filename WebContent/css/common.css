@@ -1,0 +1,120 @@
+@charset "UTF-8";
+
+*{
+	text-decoration: none;
+}
+
+/* 화면사이즈 css */
+.view-width{
+	width: 1050px;
+	margin: 0 auto; 
+	overflow: hidden;
+}
+/* 가로정렬 css */
+.row-align{
+	display: flex;
+}
+/* 세로정렬 css */
+.column-align{
+	display: flex;
+	flex-direction: column;
+}
+
+/*****header*****/
+/*navigation*/
+#navi-wrap{
+	display: flex;
+	justify-content: space-between;
+}
+#top-menu, #navi{
+	text-align: right;
+}
+
+#top-menu>a, #navi>a {
+	color: #35363A;
+	text-decoration: none;
+	margin: 0 5px;
+}
+#top-menu>a:hover, #navi>a:hover{
+	font-weight: 700;
+	color: #5a7d59;
+}
+#pipe{
+	font-size: 8px;
+	color: #8D959C;
+	margin: 0 5px;
+}
+/*logo*/
+#head-logo{
+	display: block;
+	margin: auto;
+	height: 70px;
+}
+
+/*search*/
+#search-wrap{
+	width: fit-content;
+	
+}
+#mainSearch{
+	height: 36px;
+	color: #4c4c4c;
+    font-size: 12px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    border-radius: 7px;
+}
+#searchInput {
+	width: 210px;
+    height: 36px;
+    border: 1px solid #f7f7f6;
+    background-color: white;
+    font-weight: 400;
+    font-size: 12px;
+    color: #666;
+    line-height: 16px;
+    outline: none;
+}
+#search-btn-wrap {
+	background-color: white;
+	border: 0;
+	height: 36px;
+}
+#search-btn{
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+input[type="submit"]{
+	font-family: FontAwesome;
+}
+/*warning*/
+.warningMessage {
+	text-align: center;
+    color: #5a7d59;
+    font-weight: 700;
+}
+#warning {
+    display: block;
+    margin: auto;
+    height: 100px;
+}
+#warningInfo {
+    border: solid 1px gray;
+    width: fit-content;
+    padding: 10px;
+    margin: 20px auto;
+}
+
+/**검색결과*/
+#result-error{
+	
+}
+
+
+#title {
+	width: fit-content;
+	margin: 0 auto;
+	font-size: 30px;
+}

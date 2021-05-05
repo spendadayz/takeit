@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+#itemadd_table table, #itemadd_table tr, #itemadd_table th, #itemadd_table td{
+	width: 300px;
+	border: solid 1px #8D959C;
+	border-collapse: collapse;
+	margin: 0 auto;
+	padding: 5px;
+}
+#itemadd_table th{
+	
+	width: 100px;
+	border: solid 1px #8D959C;
+	
+}
+
+.itemaddBtn {
+	text-align: center;
+	display: inline-block;
+	margin: 5px auto 0 auto;
+	width: 100px;
+	height: 43px;
+	line-height: 45px;
+	font-size:20px;
+	font-weight: 500;
+	color: #35363a;
+	border: solid 1px #8D959C;
+	background-color: #fff;
+	margin-right: 10px;
+	
+}
+
+
+.itemaddBtn:hover{
+	background-color: #5a7d59;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}

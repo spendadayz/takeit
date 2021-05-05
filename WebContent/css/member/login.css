@@ -1,0 +1,100 @@
+@charset "UTF-8";
+	
+#contents_box {	
+	margin: auto;
+}
+	
+#contents_box > table {		
+	/* font-size: 9px; */
+}
+	
+#contents_box > submit{
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	background-color: #7B977A;
+	color: white;
+	cursor: pointer;
+}
+
+#memberId{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#memberPw{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#sellerId{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#sellerPw{
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+}
+
+#find{
+	text-decoration: none;
+	font-size: 9px;
+}
+
+#normalLogin{
+	width:100%;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	background-color: #7B977A;
+	color: white;
+	margin-top: 15px;
+	border: 1px solid #7B977A;
+	cursor: pointer;
+}
+
+#sellerLogin{
+	width:100%;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	background-color: #7B977A;
+	color: white;
+	margin-top: 15px;
+	border: 1px solid #7B977A;
+	cursor: pointer;
+}
+
+#inputNormal{
+	width:100%;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	background-color: #7B977A;
+	color: white;
+	border: 1px solid #7B977A;
+	cursor: pointer;
+}
+#inputSeller{
+	width:100%;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	background-color: #7B977A;
+	color: white;
+	border: 1px solid #7B977A;
+	cursor: pointer;
+}

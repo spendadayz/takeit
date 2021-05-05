@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+/**장바구니 조회*/
+#cart-wrap{
+	margin-top: 50px;
+}
+#cart{
+	width: 1050px;
+	margin: 0 auto;
+	display: flex;
+}
+#cart-img{
+	width: 180px;
+    height: 250px;
+}
+#cart-info{
+    width: inherit;
+    margin-left: 15px;
+}
+#cart-info>b, #cart-info>span{
+    line-height: 10px;
+}
+
+#cart-itemName{
+	font-size: 20px;
+	font-weight: 600;
+}
+#cart-itemName>a{
+	color: black;
+}
+#cart-itemName>a:hover{
+	color: #5a7d59;
+}
+#cart-itemPrice{
+	font-weight: 600;
+}
+#shipfee-info{
+	width: 1050px;
+	margin: 0 auto;
+}
+#shipfee-free{
+	float: right;
+	text-align: right;
+	font-size: 12px;
+	color: grey;
+}
+#change-cart-itemQty{
+	width: 50px;
+	line-height: 15px; 
+	font-size: 15px;
+}
+/**장바구니 변경, 구매,삭제 버튼*/
+.cart-change-btn{
+    width: 42px;
+    height: 25px;
+    font-size: 14px;
+    background-color: white;
+    border-radius: 30px;
+}
+.cart-change-btn:hover{
+	background-color: #5a7d59;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}
+#cart-btn-wrap{
+    place-self: flex-end;
+}
+#cart-btn{
+	border: solid 1px #8D959C;
+	color: #000;
+	text-decoration: none;
+	padding: 7px 25px 7px 25px;
+}
+.small-btn{
+	border: solid 1px #8D959C;
+	color: #000;
+	text-decoration: none;
+	padding: 7px 25px 7px 25px;
+	background-color: white;
+}
+.small-btn:hover{
+	background-color: #5a7d59;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}
+#cart-totPrice{
+	line-height: 3px;
+    font-size: 20px;
+    font-weight: 700; 	
+    vertical-align: middle;
+    margin-top: auto;
+}
+/**장바구니 전체금액*/
+#cart-final-area{
+	width: 1050px;
+	margin: 0 auto;
+}
+#cart-final-price-area{
+	width: fit-content;
+	margin: 0 auto;
+}
+#cartTotalPrice{
+	text-align: center;
+	font-size: 30px;
+	font-weight: 700;
+	color: red;
+}
+#cart-fainal-btn-area{
+	width: fit-content;
+	margin: 0 auto;
+	display: flex;
+}
+/**장바구니 등록 */
+#addCart-area{
+	display: inline-block;
+    width: inherit;
+}
+#addCart-btn-area{
+    float: right;
+}
+
+#addcart-itemName{
+	font-size: 15px;
+	font-weight: 600;
+}
+#addcart-itemQty{
+	text-align: center;
+	width: 100px;
+	padding: .8em .5em;
+	border: 1px solid #999;
+}

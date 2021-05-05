@@ -1,0 +1,151 @@
+@charset "UTF-8";
+
+/*  css 파일 */
+
+/* a config */
+/* a:link {
+	text-decoration: none;
+	color: #152a84;
+}
+a:visited {
+	text-decoration: none;
+	color: #c0c0c0;
+}
+a:hover {
+	text-decoration: none;
+	color: 152a84;
+	background-color: #ffcc00;
+}
+a:active {
+	text-decoration: underline;
+	color: #ff0000;
+}*/
+/* 
+logo img
+img[src^="img/logo/"] {
+	width: 50px;
+	height: 40px;
+}
+
+img[src$="img/.jpg/"] {
+	width: 30px;
+	height: 30px;
+}
+
+
+main_menu
+#main_menu {
+	text-align: right;
+}
+
+footer_menu
+div#footer_menu {
+	text-align: center;
+}
+
+ class="seperator"
+span.seperator {
+	margin: 0 5px;
+	font-size: 0.7em;
+	color: gray;
+}
+
+span.seperator_title {
+	margin: 0 5px;
+	font-size: 0.8em;
+	color: #ffcc00;	
+}
+
+title
+h3.title {
+	color: #152a84;		
+}
+
+form readonly
+input[readonly] {
+	background-color: cyan;
+}
+
+input.large {
+	width: 500px;	
+}
+
+
+
+tr.title_rows {
+	text-align: center;
+	background-color: purple;
+	color: white;
+}
+
+div.form {
+	margin-top: 20px;
+	margin-left: 20px;
+	padding: 5px;
+} */
+img[src$="item/.jpg/"] {
+	width: 30px;
+	height: 30px;
+}
+
+table {
+	width: 100%;
+	border: 1px solid black;
+}
+
+.itemTable {
+	border-collapse: collapse;
+}
+
+.itemTable th, .itemTable td {
+	border: 1px solid black;
+}
+
+#enroll_total {
+	border: 0px solid black;
+	width : 1700px;
+	height: 400px;
+	margin: 100px;
+}
+
+#meat_div {
+	margin-left: 50px;
+}
+.item_list>li{
+	list-style: none;
+ 
+}
+.item_Li{ display: flex;
+          flex-wrap:wrap;
+           gap:2em;
+           margin:20px;
+           align:'center';
+}
+ul  {list-style-type: none; float: left;
+}
+.itemLI{
+	font-family: 굴림;
+	font-weight:bold;
+ 
+}
+.item_wrap{
+	margin: 0 auto;
+	
+}
+/**item detail*/
+.detail_div{
+	width: 1050px;
+	margin: 0 auto;
+}
+.takeit_detail_wrap{
+	width: 1050px;
+	display: flex;
+}
+.btn-area{
+	width: fit-content;
+	float: right;
+}
+
+.it_info{
+	line-height: 2;
+}
