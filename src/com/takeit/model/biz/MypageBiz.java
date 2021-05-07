@@ -24,27 +24,67 @@ public class MypageBiz {
 	private MypageDao dao = MypageDao.getInstance();
 	
 	
-	/**
-	 * 상점 카테고리 목록 조회
-	 * @param dto
-	 * @throws CommonException
-	 */
-	public void getshopCategoryList( ArrayList<Seller> shopCategoryList) throws CommonException{
+	//판매자 리스트
+		public void getSellerList(ArrayList<Seller> sellerList) throws CommonException{
+			Connection conn = JdbcTemplate.getConnection();
+			
+			try {
+				dao.selectSellerList(conn, sellerList);
+				
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+				
+				throw e;
+			}finally {
+				JdbcTemplate.close(conn);
+			}
+			
+		}
+	
+	//일반회원 리스트
+	public void getMemberList(ArrayList<Member> memberList) throws CommonException{
 		Connection conn = JdbcTemplate.getConnection();
 		
 		try {
-			dao.getShopCategoryList(conn, shopCategoryList);
-			JdbcTemplate.commit(conn);
+			dao.selectMemberList(conn, memberList);
+			
 			
 		}catch (Exception e) {
 			e.printStackTrace();
-			JdbcTemplate.rollback(conn);
+			
 			throw e;
 		}finally {
 			JdbcTemplate.close(conn);
 		}
 		
 	}
+	
+	
+	
+	/**
+	 * 상점 카테고리 목록 조회
+	 * @param dto
+	 * @throws CommonException
+	 */
+	public void itemget(Item dto) throws CommonException{
+		Connection conn = JdbcTemplate.getConnection();
+		
+		try {
+			dao.itemget(conn, dto);
+			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+			throw e;
+		}finally {
+			JdbcTemplate.close(conn);
+		}
+		
+	}
+	
+	
 	
 	
 	/**
@@ -57,9 +97,10 @@ public class MypageBiz {
 		
 		try {
 			dao.addItem(conn, dto);
-			
+			JdbcTemplate.commit(conn);
 		}catch (Exception e) {
 			e.printStackTrace();
+			JdbcTemplate.rollback(conn);
 			throw e;
 		}finally {
 			JdbcTemplate.close(conn);
@@ -67,26 +108,6 @@ public class MypageBiz {
 		
 	}
 	
-	
-	/**
-	 * 상품 포장 타입 목록 조회
-	 * @param packTypeList
-	 * @throws CommonException
-	 */
-		public void getpackTypeList(ArrayList<Item> packTypeList) throws CommonException{
-			
-			Connection conn = JdbcTemplate.getConnection(); 
-			try {
-				dao.getpackTypeList(conn, packTypeList);
-				
-			}catch (Exception e) {
-				e.printStackTrace();
-				throw e;
-			}finally {
-				JdbcTemplate.close(conn);
-			}
-			
-		} 
 	
 	/**
 	 * 카테고리 목록 조회

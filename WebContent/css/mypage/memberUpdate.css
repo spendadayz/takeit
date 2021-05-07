@@ -1,0 +1,197 @@
+@charset "UTF-8";
+
+ #myInfo_table table,#myInfo_table th,  #myInfo_table td , #myInfo_table tr{
+	
+		margin: 0 auto;
+		border-collapse: collapse;
+		padding: 5px;
+		width: 1050px;
+		margin-top: 30px;
+		margin-bottom: 20px;
+	
+	
+}
+
+
+#myInfo_table th {
+	width:60px;
+}
+
+#myInfo_table td {
+	width: 90px;
+}
+
+
+#myInfo_table{
+	width: 490px;
+	margin: 0 auto;
+}
+
+
+
+#mypage_Btn{
+	text-align: center;
+	display: block;
+	margin: 5px auto 0 auto;
+	width: 300px;
+	height: 45px;
+	line-height: 45px;
+	font-size:20px;
+	font-weight: 500;
+	color: #35363a;
+	border: solid 1px #8D959C;
+	background-color: #fff;
+	margin-top: 30px;
+}
+#mypage_Btn:hover{
+	background-color: #5a7d59;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+#memberInfo_button{
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 9px;
+	border: 1px solid #7B977A;
+	color: white;
+	background: #7B977A;
+	cursor: pointer;
+}
+#addressDetail{
+	
+	width:250px;
+	
+}
+#address{
+	
+	width:250px;
+	
+}
+
+
+
+#sellerId {
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 15px;
+	border: 1px solid #7B977A;
+	
+}
+
+#sellerPw {
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 15px;
+	border: 1px solid #7B977A;
+}
+
+#sellerPw2 {
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 15px;
+	border: 1px solid #7B977A;
+}
+
+#memberId {
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 15px;
+	border: 1px solid #7B977A;
+}
+
+#memberPw {
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 15px;
+	border: 1px solid #7B977A;
+}
+
+#memberPw2 {
+	width:250px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 15px;
+	border: 1px solid #7B977A;
+}
+
+/* .removeBtn{
+	text-align: center;
+    display: block;
+    margin: 5px auto 0 auto;
+    width: 290px;
+    height: 45px;
+    line-height: 45px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #35363a;
+    border: solid 1px #8D959C;
+    background-color: #fff;
+    
+}
+.removeBtn:hover{
+	background-color: #5a7d59;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+} */
+
+
+
+/* .updateBtn{
+	text-align: center;
+    display: block;
+    margin: 5px auto 0 auto;
+    width: 290px;
+    height: 45px;
+    line-height: 45px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #35363a;
+    border: solid 1px #8D959C;
+    background-color: #fff;
+    
+} */
+
+
+.removeBtn{
+	width: 450px;
+	height:40px; 
+	padding: 0px 19px;
+	font-size: 15px;
+	border: 1px solid #7B977A;
+	color: white;
+	background: #7B977A;
+	cursor: pointer;
+	margin: auto 0 auto 50px;
+    
+}
+
+
+
+.updateBtn{
+	width: 450px;
+	height:40px; 
+	padding: 0px 19px;
+	font-size: 15px;
+	border: 1px solid #7B977A;
+	color: white;
+	background: #7B977A;
+	cursor: pointer;
+	margin: auto 0 auto 50px;
+    
+}
+
+
+/* .updateBtn:hover{
+	background-color: #5a7d59;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+} */

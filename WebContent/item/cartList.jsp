@@ -10,6 +10,11 @@
 <title>takeit::장바구니</title>
 <link type="text/css" rel="stylesheet" href="/takeit/css/link.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+	function buyAllItem() {
+		$("#buyAllItem").submit();
+	}
+</script>
 </head>
 <body>
 <%
@@ -64,11 +69,11 @@
 		</div>
 		<div id="cart-btn-wrap">
 			<div>
-				<b>결제금액</b>&emsp;<span id="cart-totPrice">
+				<b>결제금액${cart.cartItemQty}</b>&emsp;<span id="cart-totPrice">
 				&#8361;<fmt:formatNumber value="<%= cart.getTotalPrice()+3500 %>" pattern="###,###"/>
 				</span>
 			</div><br>
-			<form action="#" method="post">
+			<form action="" method="post">
 				<input type="submit" value="구매" class="small-btn" style="margin-bottom: 10px;">
 			</form>
 			<form action="/takeit/cartController?action=removeCart&itemNo=<%= cart.getItemNo() %>" method="post">
@@ -81,7 +86,8 @@
 <%
 	}
 	int cartTotalPrice = (int) session.getAttribute("cartTotalPrice");
-%>
+%> 
+
 <br>
 <div id="cart-final-area">
 	<div id="cart-final-price-area">
@@ -90,12 +96,29 @@
 	</div>
 	<div id="cart-fainal-btn-area">
 		<form action="#" method="post">
-			<input type="submit" value="전체 구매" class="small-btn" style="margin-right: 10px">
+			<input type="button" value="전체 구매" class="small-btn" style="margin-right: 10px" onclick="buyAllItem()">
 		</form>
 		<form action="/takeit/cartController?action=removeAllCart" method="post">
 			<input type="submit" value="전체 삭제" class="small-btn">
 		</form>
 	</div>
 </div>
+
+<!-- 전체구매버튼 클릭시  -->
+<form id="buyAllItem" action="${CONTEXT_PATH}/order/orderController?action=orderForm" method="post">
+<c:forEach items="${cartList}" var="cart">
+	<input type="hidden" value="${cart.itemNo}" name="itemNo" id="${cart.itemNo}no"> 
+	<input type="hidden" value="${cart.cartItemQty}" name="itemQty" id="${cart.itemNo}qty"> 
+	<input type="hidden" value="${cart.itemPrice}" name="itemPrice" id="${cart.itemNo}price"> 
+	<input type="hidden" value="${cart.totalPrice}" name="totalPrice" id="${cart.itemNo}totalPrice"> 
+</c:forEach>
+	<input type="hidden" value="${cartTotalPrice}" name="cartTotalPrice" id="cartTotalPrice"> 
+</form>
+
+<!-- floating Banner -->
+<jsp:include page="/common/floatingBanner.jsp"></jsp:include>
+<!-- scroll function -->
+<jsp:include page="/common/back_to_top.jsp"></jsp:include>
+
 </body>
 </html>

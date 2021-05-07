@@ -11,21 +11,22 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 </head>
 <body>
-	<!-- 상단 메뉴 -->
-	<c:choose>
-		<c:when test="${empty memberId or empty grade}">
+
+<!-- 상단 메뉴 -->
+<c:if test="${empty memberId and empty sellerId}">
 	<!-- 로그인 전 메뉴 -->
-			<jsp:include page="/common/before_login_menu.jsp"></jsp:include>
-		</c:when>
-		<c:otherwise>
-   <!-- 로그인 후 메뉴 -->
-			<jsp:include page="/common/after_login_menu.jsp"></jsp:include>
-		</c:otherwise>
-	</c:choose>
+	<jsp:include page="/common/before_login_menu.jsp"></jsp:include>
+</c:if>
+<c:if test="${not empty memberId or not empty sellerId}">
+	<!-- 로그인 후 메뉴 -->
+	<jsp:include page="/common/after_login_menu.jsp"></jsp:include>	
+</c:if>
+
 	<!-- logo.jsp 삽입 -->
 	<jsp:include page="/common/logo.jsp"></jsp:include>
 	<!-- 네비게이션 -->
 	<jsp:include page="/common/navigation.jsp"></jsp:include>
+
 
 	<h3 align="center">REVIEW</h3>
 	<form action="/takeit/item/reviewController?action=enrollReview"
@@ -85,8 +86,7 @@
 		<br>
 		<div id="signup" align='center'>
 
-			<input type="submit" value="상품등록"> <input type="reset"
-				value="취소">
+			<input type="submit" value="후기등록"> <input type="reset" value="취소">
 
 		</div>
 	</form>

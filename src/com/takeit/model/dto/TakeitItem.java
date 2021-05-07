@@ -2,19 +2,22 @@ package com.takeit.model.dto;
 
 import java.io.Serializable;
 
+/**
+ * 잇거래상품 도메인 클래스
+ * @author 김태경
+ */
 public class TakeitItem extends Item implements Serializable {
 	private String takeitNo;
 	private int takeitPrice;
 	private int takeitCurrPrice;
 	private String takeitDate;
 	private double takeitCustScore;
-	private String takeitAlive; // boolean으로 할지 결정해야함 문자열위주로?
+	private String takeitAlive;
 	private String memberLocNo;
 	private String shopLocCode;
-	//남은시간을 ajax로 처리하려면 모집일자를 통해서 서버를 통해 받아서 나타낸다 setInterval(ajax)함수를  이용하므로 도메인은 넣지않음  
 	
-	public TakeitItem() {
-	}
+	/** 기본 생성자 */
+	public TakeitItem() {}
 	
 	public TakeitItem(String takeitNo, int takeitPrice, int takeitCurrPrice, String takeitDate, double takeitCustScore,
 			String takeitAlive, String memberLocNo, String shopLocCode) {
@@ -29,6 +32,7 @@ public class TakeitItem extends Item implements Serializable {
 		this.shopLocCode = shopLocCode;
 	}
 
+	
 	public String getTakeitDate() {
 		return takeitDate;
 	}

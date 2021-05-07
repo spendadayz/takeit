@@ -241,9 +241,7 @@ public class FrontBoardServlet extends HttpServlet {
 		
 		try {
 			bbiz.boardUpdate(boardNo, board);
-//			response.sendRedirect("/takeit/boardController?action=boardList&boardCategory='"+boardCategory+"'");
 			request.getRequestDispatcher("/boardController?action=boardList&boardCategory="+boardCategory).forward(request, response);
-//			response.sendRedirect("/takeit/index.jsp");
 		} catch (CommonException e) {
 			MessageEntity message = new MessageEntity("error",19);
 			request.setAttribute("message", message);

@@ -1,7 +1,6 @@
 package com.takeit.model.dto;
 
 public class Cart {
-
 	private String memberId;
 	private String itemNo;
 	private String itemName;

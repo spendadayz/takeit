@@ -14,11 +14,11 @@
 </head>
 <body>
 <!-- 상단 메뉴 -->
-<c:if test="${empty memberId }">
+<c:if test="${empty memberId and empty sellerId}">
 	<!-- 로그인 전 메뉴 -->
 	<jsp:include page="/common/before_login_menu.jsp"></jsp:include>
 </c:if>
-<c:if test="${not empty memberId }">
+<c:if test="${not empty memberId or not empty sellerId}">
 	<!-- 로그인 후 메뉴 -->
 	<jsp:include page="/common/after_login_menu.jsp"></jsp:include>	
 </c:if>
@@ -53,8 +53,10 @@ for(Search dto : searchList) {
 	}
 %>
 </div>
-<a href="/takeit/index.jsp" class="link">홈으로이동</a>
-	<!-- scroll function -->
+<a href="/takeit/index" class="link">홈으로이동</a>
+<!-- floating Banner -->
+<jsp:include page="/common/floatingBanner.jsp"></jsp:include>
+<!-- scroll function -->
 <jsp:include page="/common/back_to_top.jsp"></jsp:include>
 <!-- footer 구역 -->
 <jsp:include page="/common/footer.jsp"></jsp:include>

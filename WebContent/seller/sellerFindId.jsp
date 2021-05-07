@@ -40,37 +40,37 @@ function mobilePopup() {
 
 <!-- 내용 -->
 <div id="contents_box" align="center">
-<h1 align="center">아이디 찾기</h1>
-<form action="${CONTEXT_PATH}/seller/controller?action=sellerFindId" method="post">
-<table>
-	<tr>
-		<td>이름</td>
-	</tr>
-	<tr>
-		<td><input type="text" placeholder="고객님의 이름을 입력해주세요" id="name" name="name" required="required"/></td>
-	</tr>
-	<tr>
-		<td>이메일</td>
-	</tr>
-	<tr>
-		<td>
-			<input type="text" placeholder="가입 시 등록하신 이메일 주소를 입력해주세요" id="email" name="email" required="required"/>
-			<input type="button" value="인증번호" id="mobile_button" name="mobile_button" onclick="mobilePopup();"/>
-		</td>
-	</tr>
-	<tr>
-		<td>인증번호</td>
-	</tr>
-	<tr>
-		<td>
-			<input type="text" placeholder="인증번호 입력" id="mobileNum" name="mobileNum" required="required" readonly="readonly"/>
-		</td>
-	</tr>
-	<tr>
-		<td><input type="submit" value="찾기" id="check_submit"/></td>
-	</tr>
-</table>
-</form>
+<div class="view-width">
+	<h1 align="center">아이디 찾기</h1>
+	<form action="${CONTEXT_PATH}/member/controller?action=memberFindId" method="post">
+	<table id="find-account-tbl">
+		<tr>
+			<th>이름</th>
+			<td><input type="text" placeholder="고객님의 이름을 입력해주세요" id="name" name="name" required="required"/></td>
+		</tr>
+		<tr>
+			<th>이메일</th>
+			<td>
+				<input type="text" placeholder="가입 시 등록하신 이메일 주소를 입력해주세요" id="email" name="email" required="required"/>
+				<input type="button" value="인증번호" id="mobile_button" name="mobile_button" onclick="mobilePopup();"/>
+			</td>
+		</tr>
+		<tr>
+			<th>인증번호</th>
+			<td>
+				<input type="text" placeholder="인증번호 입력" id="mobileNum" name="mobileNum" readonly="readonly" required="required"/>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: center;"><input type="submit" value="찾기" id="check_submit"/></td>
+		</tr>
+	</table>
+	</form>
+	</div>
 </div>
+<!-- scroll function -->
+<jsp:include page="/common/back_to_top.jsp"></jsp:include>
+<!-- footer 구역 -->
+<jsp:include page="/common/footer.jsp"></jsp:include>
 </body>
 </html> 

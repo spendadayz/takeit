@@ -2,6 +2,10 @@ package com.takeit.model.dto;
 
 import java.io.Serializable;
 
+/**
+ * 상점구역 도메인 클래스
+ * @author 김태경
+ */
 public class ShopLoc implements Serializable{
 	private String shopLocCode;
 	private String shopLocName;

@@ -47,8 +47,8 @@ public class Seller implements Serializable{
 	private String shopKakaoId;
 	private String shopImg;
 	private String shopCategoryNo;
-	private String shopCategoryName;
 	private String shopLocCode;
+	private String shopCategoryName;
 	
 	/* 기본 생성자 */
 	public Seller() {}
@@ -56,7 +56,7 @@ public class Seller implements Serializable{
 	/* 사용자 입력 데이터 */
 	public Seller(String sellerId, String sellerPw, String name, String mobile, String email, String postNo,
 			String address, String addressDetail, String sellerNo, String shopMobile, String shopName,
-			String shopKakaoId, String shopImg, String shopCategoryNo) {
+			String shopKakaoId, String shopImg, String shopCategoryNo, String shopLocCode) {
 		this.sellerId = sellerId;
 		this.sellerPw = sellerPw;
 		this.name = name;
@@ -71,6 +71,7 @@ public class Seller implements Serializable{
 		this.shopKakaoId = shopKakaoId;
 		this.shopImg = shopImg;
 		this.shopCategoryNo = shopCategoryNo;
+		this.shopLocCode = shopLocCode;
 	}
 
 	/* 전체 데이터 */
@@ -242,6 +243,8 @@ public class Seller implements Serializable{
 		this.shopLocCode = shopLocCode;
 	}
 
+	
+	
 	public String getShopCategoryName() {
 		return shopCategoryName;
 	}
@@ -257,9 +260,10 @@ public class Seller implements Serializable{
 				+ ", addressDetail=" + addressDetail + ", grade=" + grade + ", sellerNo=" + sellerNo + ", shopMobile="
 				+ shopMobile + ", shopName=" + shopName + ", custScore=" + custScore + ", shopKakaoId=" + shopKakaoId
 				+ ", shopImg=" + shopImg + ", shopCategoryNo=" + shopCategoryNo + ", shopCategoryName="
-				+ shopCategoryName + ", shopLocCode=" + shopLocCode + "]";
+				+ ", shopLocCode=" + shopLocCode + "]";
 	}
 
+	
 	
 }
 

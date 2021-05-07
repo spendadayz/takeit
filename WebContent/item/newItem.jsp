@@ -1,27 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.takeit.model.dto.Item" %>
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="com.takeit.model.dto.MessageEntity" %>
+<%@ page import="com.takeit.model.dto.*" %>
 <%@ include file="/common/taglib_menu.jsp" %> 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전체 상품목록</title>
+<title>takeit::전체 상품목록</title>
 <link type="text/css" rel="stylesheet" href="/takeit/css/link.css">
 <link type="text/css" rel="stylesheet" href="/takeit/css/item.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 </head>
 <body>
-<c:if test="${empty memberId }">
+<!-- 상단 메뉴 -->
+<c:if test="${empty memberId and empty sellerId}">
 	<!-- 로그인 전 메뉴 -->
 	<jsp:include page="/common/before_login_menu.jsp"></jsp:include>
 </c:if>
-<c:if test="${not empty memberId }">
+<c:if test="${not empty memberId or not empty sellerId}">
 	<!-- 로그인 후 메뉴 -->
 	<jsp:include page="/common/after_login_menu.jsp"></jsp:include>	
 </c:if>
@@ -32,31 +30,33 @@
 
 <!-- contents menu -->
 <h1 class="title" style="width:fit-content; margin: 20px auto; font-size: 30px;">신상품</h1>
-<table>
-
-	
-	<c:forEach var="dto" items="${itemList}">
-		<div class="item_wrap">
-		<ul class="item_list" >
-			<li>
-			<a href="/takeit/item/itemController?action=itemDetail&itemNo=${dto.itemNo}">
-				<img id="itemImg" alt="${dto.itemImg}" src="/takeit/img/item/${dto.itemImg}">
-			
-				</a>
-			</li>
-
-				<!--<li id="itemLI">${dto.itemImg}</li>-->
-				<li id="itemLI">${dto.itemName}</li>
-				<li id="itemFr">신선도 :${dto.freshPercent}%</li>
-				<li id="itemDc" style="color: red">${dto.discRate}%</li>
-				<li id="itemPr">${dto.itemPrice}원</li>
-			  
-	       
-</ul>
+<div class="item_wrap">
+<%
+	ArrayList<Item> itemList = (ArrayList<Item>)request.getAttribute("itemList");
+	for(Item dto : itemList){
+%>
+	<div class="item_list" style="white-space: nowrap;" >
+		<div>
+		<a href="/takeit/item/itemController?action=itemDetail&itemNo=<%= dto.getItemNo() %>">
+			<img id="itemListImg" src="/takeit/img/item/<%= dto.getItemImg() %>">
+		</a>
+		</div>
+		<a href="/takeit/item/itemController?action=itemDetail&itemNo=<%= dto.getItemNo() %>">
+		<span id="shop-name">[<%= dto.getShopName() %>]</span><br>
+		<span id="itemLI"><%= dto.getItemName() %></span><br>
+		</a>
+		<span id="itemFr">신선도 :<%= dto.getFreshPercent() %>%</span><br>
+		<span id="itemPr">&#8361;<fmt:formatNumber value="<%= dto.getItemPrice() %>" pattern="###,###"/></span>
+		<span id="itemDc" style="color: red">(<%= dto.getDiscRate()%>%할인)</span>
+		<span id="itemDiscPrice"><fmt:formatNumber value="<%= (dto.getItemPrice())*(100-(dto.getDiscRate()))/100 %>" pattern="###,###"/>원</span>
+	</div>
+<%
+	}
+%>
 </div>		
-	</c:forEach>	
-</table>
 
+<!-- floating Banner -->
+<jsp:include page="/common/floatingBanner.jsp"></jsp:include>
 <!-- scroll function -->
 <jsp:include page="/common/back_to_top.jsp"></jsp:include>
 <!-- footer 구역 -->

@@ -13,8 +13,9 @@
     height: 300px;
 }
 #review-img:hover{
-	-webkit-transform: scale(1.05);
-	transform: scale(1.05);
+	-webkit-transform: scale(1.005);
+	transform: scale(1.005);
+	box-shadow: 3px 3px grey;
 }
 #reviewTitle{
 	

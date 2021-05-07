@@ -4,7 +4,7 @@ import com.takeit.model.dto.MessageEntity;
 
 /**
  * 사용자 정의 예외클래스
- */
+ */ 
 public class CommonException extends Exception {
 	private MessageEntity entity;
 	

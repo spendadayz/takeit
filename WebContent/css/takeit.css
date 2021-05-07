@@ -4,10 +4,16 @@
 #takeitImg-wrap{
 	width: fit-content;
 }
+#takeit-detailImg{
+	position:relative;
+	width: 246px;
+    height: 316px;
+    margin-top: 45px;
+}
 #takeitImg{
 	position:relative;
-	width: 230px;
-    height: 300px;
+	width: 246px;
+    height: 316px;
 }
 #takeitImg:hover{
 	-webkit-transform: scale(1.005);
@@ -23,7 +29,7 @@
 	display: block;
     position: absolute;
     margin-top: -35px;
-    margin-left: 139px;
+    margin-left: 153px;
     font-weight: 700;
     height: 31px;
     width: 91px;
@@ -34,7 +40,10 @@
 }
 .takeit-listTime{
 	margin-top: 15px;
-	padding: 0 5.5px;
+	width:246px;
+	height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
     position: absolute;
     text-align: center;
 	font-weight: 700;
@@ -85,4 +94,141 @@
 }
 .it_info{
 	line-height: 2;
+}
+
+/**지역시장등록 shopLocInput*/
+.side-menu{
+	margin-right: 50px;
+}
+.shopLocInput-wrap{
+	margin: 33px auto;
+}
+.shopLocInput-wrap>h1{
+	width:fit-content; 
+	margin: 0 auto;
+	margin-bottom: 40px;
+}
+.shopLocInput-tbl{
+	width: fit-content;
+}
+.shopLoc-input{
+	height: 35px;
+	width: 250px;
+	border: 1px solid grey;
+	font-size: 14px;
+}
+#shopLoc-btn-area{
+	margin-top: 15px;
+	display: flex;
+	width: 550px;
+	margin: 20px auto;
+
+}
+.shopLoc-btn{
+	text-align: center;
+	width: 170px;
+	height: 45px;
+	line-height: 45px;
+	font-size:20px;
+	font-weight: 500;
+	color: #35363a;
+	border: solid 1px #8D959C;
+	background-color: #fff;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+.shopLoc-btn:hover{
+	background-color: #5a7d59;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}
+/**takeit 등록*/
+.takeitInput-wrap{
+	margin: 33px auto;
+}
+.takeitInput-wrap>h1{
+	width:fit-content; 
+	margin: 0 auto;
+	margin-bottom: 40px;
+}
+.takeitInput-tbl{
+	width: fit-content;
+}
+.shopLoc-input{
+	height: 35px;
+	width: 250px;
+	border: 1px solid grey;
+	font-size: 14px;
+}
+#shopLoc-btn-area{
+	margin-top: 15px;
+	display: flex;
+	width: 550px;
+	margin: 20px auto;
+
+}
+.shopLoc-btn{
+	text-align: center;
+	width: 170px;
+	height: 45px;
+	line-height: 45px;
+	font-size:20px;
+	font-weight: 500;
+	color: #35363a;
+	border: solid 1px #8D959C;
+	background-color: #fff;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+.shopLoc-btn:hover{
+	background-color: #5a7d59;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}
+#shopLocCode{
+	height: 35px;
+	width: 250px;
+	border: 1px solid grey;
+	font-size: 14px;
+	cursor: pointer;
+}
+#takeitInput{
+	margin-top:10px;
+	height: 35px;
+	width: 250px;
+	border: 1px solid grey;
+	font-size: 14px;
+}
+#takeitInput-btn-area{
+	margin-top: 15px;
+	display: flex;
+	width: 550px;
+	margin: 20px auto;
+
+}
+.takeitInput-btn{
+	text-align: center;
+	width: 170px;
+	height: 45px;
+	line-height: 45px;
+	font-size:20px;
+	font-weight: 500;
+	color: #35363a;
+	border: solid 1px #8D959C;
+	background-color: #fff;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+.takeitInput-btn:hover{
+	background-color: #5a7d59;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

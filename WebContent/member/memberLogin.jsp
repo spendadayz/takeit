@@ -12,10 +12,10 @@
 <script type="text/javascript" src="${CONTEXT_PATH}/js/member/login.js"></script>
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<!-- 카카오 로그인 -->
 <script>
-Kakao.init('ef7d648c9d8cef88d6c092d4942eee41'); //발급받은 키 중 javascript키를 사용해준다.
+Kakao.init('4a836a6d7613b825e60dc25d5b9d8a82'); //발급받은 키 중 javascript키를 사용해준다.
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
-//카카오로그인
 function kakaoLogin() {
     Kakao.Auth.login({
       scope: 'account_email',
@@ -63,7 +63,6 @@ function kakaoLogin() {
 
 <!-- 내용 -->
 <div id="contents_box" align="center">
-<form action="${CONTEXT_PATH}/member/controller?action=memberLogin" method="post">
 <table>
 	<tr>
 		<td align="center">
@@ -71,6 +70,9 @@ function kakaoLogin() {
 			판매자 <input type="radio" id="sellerLoginFrom" name="sellerLoginFrom"/>
 		</td>
 	</tr>
+</table>
+<form action="/takeit/member/controller?action=memberLogin" method="post">
+<table>
 	<tr>
 		<td><input type="text" placeholder="고객님의 아이디를 입력해주세요" id="memberId" name="memberId" required="required"/></td>
 	</tr>
@@ -104,5 +106,9 @@ function kakaoLogin() {
 </div> -->
 </form>
 </div>
+<!-- scroll function -->
+<jsp:include page="/common/back_to_top.jsp"></jsp:include>
+<!-- footer 구역 -->
+<jsp:include page="/common/footer.jsp"></jsp:include>
 </body>
 </html> 

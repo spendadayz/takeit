@@ -23,14 +23,14 @@
 }
 
 #container{
-	height: 600px;
+	/* height: 600px; */
 	display: flex;
 }
 .myPage_menu_aside {
 	width: 200px;
-	height: 500px;
+	height: 600px;
 	float: left;
-	margin-left: 200px;
+	/* margin-left: 200px; */
 	margin-top: 100px;
 }
 
@@ -103,4 +103,64 @@
 #orderState{
 	width: 200px;
 	margin-left: 20px;
+}
+
+#memberList_table table,#memberList_table th,  #memberList_table td , #memberList_table tr{
+	
+		border: solid 1px #8D959C;
+		margin: 0 auto;
+		border-collapse: collapse;
+		padding: 5px;
+		width: 1050px;
+		margin-top: 30px;
+		margin-bottom: 20px;
+	
+	
+}
+
+
+#memberList_table th {
+	width:130px;
+}
+
+#memberList_table td {
+	width: 400px;
+}
+
+
+/* #memberList_table{
+	width: 500px;
+	margin: 0 auto;
+} */
+
+#mypage_Btn{
+	text-align: center;
+	display: block;
+	margin: 5px auto 0 auto;
+	width: 300px;
+	height: 45px;
+	line-height: 45px;
+	font-size:20px;
+	font-weight: 500;
+	color: #35363a;
+	border: solid 1px #8D959C;
+	background-color: #fff;
+	margin-top: 30px;
+}
+#mypage_Btn:hover{
+	background-color: #5a7d59;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+#deleteBtn{
+	width: 100px;
+	height:35px; 
+	padding: 0px 19px;
+	font-size: 15px;
+	border: 1px solid #7B977A;
+	color: white;
+	background: #7B977A;
+	cursor: pointer;
 }

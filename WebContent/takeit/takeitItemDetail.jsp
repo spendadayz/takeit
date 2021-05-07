@@ -109,8 +109,7 @@ $(document).ready(function (){
 <div class="takeit_detail">
 	<div class="takeit_item-content takeit_detail_wrap">
 		<div class="takeitImg-wrap" >
-			<img id="takeitImg" style="width:330px; height: 400px; " src="/takeit/img/item/${takeitItem.itemImg}">
-			
+			<img id="takeit-detailImg" style="width:330px; height: 400px; " src="/takeit/img/item/${takeitItem.itemImg}">
 		</div>
 		<div class="desc takeit_detail_wrap">
 			<fmt:formatNumber var="itemPrice" value="${takeitItem.itemPrice}" type="number"/>
@@ -182,6 +181,8 @@ $(document).ready(function (){
 	</div>
 </div>
 
+<!-- floating Banner -->
+<jsp:include page="/common/floatingBanner.jsp"></jsp:include>
 <!-- scroll function -->
 <jsp:include page="/common/back_to_top.jsp"></jsp:include>
 <!-- footer 구역 -->

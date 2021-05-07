@@ -3,27 +3,40 @@ package com.takeit.model.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * 주문 도메인 클래스
+ * @author 김태경
+ */
 public class Order implements Serializable {
 	// 상품
 	private String itemTakeit;
 	// 배송
 	private String shipStatus;
-
 	// 주문
 	private String orderNo;
 	private String receiveMethod;
 	private String recipientName;
 	private String recipientPostNo;
 	private String recipientAddr;
+	private String recipientAddrDetail;
 	private String recipientMobile;
+	
+	
 	private String shipRequest;
 	private int orderPrice;
 	private String shipStatusCode;
 	private String memberId;
+	private String orderCancelReq;
+	private String orderCancel;
+	
+	// 판매자
+	private String sellerId;
+	private String shopName;
+
 	// 주문상세
 	private ArrayList<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
-	
-	
+
+	/** 기본 생성자 */
 	public Order() {
 	}
 
@@ -42,17 +55,15 @@ public class Order implements Serializable {
 	 * @param orderPrice      총주문금액
 	 * @param shipStatusCode  배송상태코드
 	 * @param memberId        주문자 아이디
-	 * @param itemNos         상품번호
-	 * @param itemQtys        상품수량
-	 * @param itemPayPrices   상품결제가격
+	 * @param orderCancelReq  주문취소요청여부
+	 * @param orderCancel     주문취소여부
+	 * @param orderDetails    주문상세
 	 */
-	public String getItemTakeit() {
-		return itemTakeit;
-	}
 
 	public Order(String itemTakeit, String shipStatus, String orderNo, String receiveMethod, String recipientName,
 			String recipientPostNo, String recipientAddr, String recipientMobile, String shipRequest, int orderPrice,
-			String shipStatusCode, String memberId, ArrayList<OrderDetail> orderDetails) {
+			String shipStatusCode, String memberId, String orderCancelReq, String orderCancel, String sellerId,
+			String shopName, ArrayList<OrderDetail> orderDetails) {
 		super();
 		this.itemTakeit = itemTakeit;
 		this.shipStatus = shipStatus;
@@ -66,7 +77,57 @@ public class Order implements Serializable {
 		this.orderPrice = orderPrice;
 		this.shipStatusCode = shipStatusCode;
 		this.memberId = memberId;
+		this.orderCancelReq = orderCancelReq;
+		this.orderCancel = orderCancel;
+		this.sellerId = sellerId;
+		this.shopName = shopName;
 		this.orderDetails = orderDetails;
+	}
+
+	
+	
+	public String getRecipientAddrDetail() {
+		return recipientAddrDetail;
+	}
+
+	public void setRecipientAddrDetail(String recipientAddrDetail) {
+		this.recipientAddrDetail = recipientAddrDetail;
+	}
+
+	public String getSellerId() {
+		return sellerId;
+	}
+
+	public void setSellerId(String sellerId) {
+		this.sellerId = sellerId;
+	}
+
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
+	public String getOrderCancelReq() {
+		return orderCancelReq;
+	}
+
+	public void setOrderCancelReq(String orderCancelReq) {
+		this.orderCancelReq = orderCancelReq;
+	}
+
+	public String getOrderCancel() {
+		return orderCancel;
+	}
+
+	public void setOrderCancel(String orderCancel) {
+		this.orderCancel = orderCancel;
+	}
+
+	public String getItemTakeit() {
+		return itemTakeit;
 	}
 
 	public String getShipStatus() {
@@ -168,7 +229,45 @@ public class Order implements Serializable {
 	public void setItemTakeit(String itemTakeit) {
 		this.itemTakeit = itemTakeit;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append(itemTakeit);
+		builder.append(", ");
+		builder.append(shipStatus);
+		builder.append(", ");
+		builder.append(orderNo);
+		builder.append(", ");
+		builder.append(receiveMethod);
+		builder.append(", ");
+		builder.append(recipientName);
+		builder.append(", ");
+		builder.append(recipientPostNo);
+		builder.append(", ");
+		builder.append(recipientAddr);
+		builder.append(", ");
+		builder.append(recipientAddrDetail);
+		builder.append(", ");
+		builder.append(recipientMobile);
+		builder.append(", ");
+		builder.append(shipRequest);
+		builder.append(", ");
+		builder.append(orderPrice);
+		builder.append(", ");
+		builder.append(shipStatusCode);
+		builder.append(", ");
+		builder.append(memberId);
+		builder.append(", ");
+		builder.append(orderCancelReq);
+		builder.append(", ");
+		builder.append(orderCancel);
+		builder.append(", ");
+		builder.append(sellerId);
+		builder.append(", ");
+		builder.append(shopName);
+		builder.append(", ");
+		builder.append(orderDetails);
+		return builder.toString();
+	}
 }

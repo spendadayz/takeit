@@ -13,7 +13,7 @@ public class Item implements Serializable{
 	
 	private String packTypeNo;
 	private String packTypeName;
-	//카테고
+	//카테고리
 	private String itemCategoryNo;
 	private String itemCategoryName;
 	private String expirationDate;

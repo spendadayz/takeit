@@ -36,6 +36,22 @@ public class ReviewBiz {
 		}
 	}
 	/**
+	 * 내 후기 전체조회
+
+	 * @param dto review
+	 * @return 성공시 등록 미입력시 오류처리
+	 */
+	public void getMyReviewList(ArrayList<Review> ReviewList , String memberId) throws CommonException {
+		Connection con = JdbcTemplate.getConnection();
+		try {
+			dao.getMyReviewList(con, ReviewList, memberId);
+		} catch (CommonException e) {
+			throw e;
+		} finally {
+			JdbcTemplate.close(con);
+		}
+	}	
+	/**
 	 * <pre>
 	 * 후기등록
 	 * -- 상품등록 입력 데이터  
@@ -94,11 +110,33 @@ public class ReviewBiz {
 
 		}
 	}
+
+	/**후기상세조회*/
+	public void searchReview(Review dto,String reviewNo) throws CommonException {
+		//ReviewDao dao = ReviewDao.getInstance();
+		Connection conn = JdbcTemplate.getConnection();
+		System.out.println("dto = "+ reviewNo);
+		try {
+			
+			int hits = dao.hits(conn, reviewNo);
+			JdbcTemplate.commit(conn);
+			if(hits != 0) {
+			dao.lookReview(conn, dto,reviewNo);
+			}
+		} catch (CommonException e) {
+			JdbcTemplate.rollback(conn);
+			throw e;
+		} finally {
+			JdbcTemplate.close(conn);
+		}
+		
+	}
+
 	/**후기삭제*/
-	public void reviewDelete(String reviewNo,String memberId,String reviewTitle) throws CommonException {
+	public void reviewDelete(String reviewNo,String memberId) throws CommonException {
 		Connection con = JdbcTemplate.getConnection();
 		try {
-			dao.deleteReview(con,reviewNo, memberId, reviewTitle);
+			dao.deleteReview(con,reviewNo, memberId);
 			JdbcTemplate.commit(con);
 		} catch (CommonException e) {
 			JdbcTemplate.rollback(con);
@@ -106,7 +144,7 @@ public class ReviewBiz {
 		} finally {
 			JdbcTemplate.close(con);
 		}
-		
+
 	}
 }
 

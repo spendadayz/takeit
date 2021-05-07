@@ -1,0 +1,112 @@
+@charset "UTF-8";
+
+/**사이드바*/
+.side-menu{
+	margin-right: 50px;
+}
+.orderList-wrap>h1, .orderList-wrap>h3,
+#personal-info>h1, #recipient-info>h1
+{
+	width:fit-content; 
+	margin: 0 auto;
+	font-size: 30px;
+}
+order-info>span{
+	font-size: 14px;
+}
+/**주문버튼*/
+.cancle-btn{
+	border: solid 1px #8D959C;
+	color: #000;
+	text-decoration: none;
+	padding: 7px 25px 7px 25px;
+	background-color: white;
+    border-radius: 30px;
+    font-weight: 600;
+}
+.cancle-btn:hover{
+	background-color: #5a7d59;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}
+/**주문 내역 정보*/
+#orderList-img>img{
+	width:150px; 
+	height:200px;
+	margin-right: 15px;
+}
+.order-detail-wrap{
+	display: flex;
+	margin-top: 13px;
+}
+.order-detail{
+	display: inline-block;
+	margin-top: 20px;
+	width: 300px;
+}
+.order-detail>span{
+	font-size: 20px;
+	line-height: 1.7;
+
+}
+/**주문내역 버튼영역*/
+.order-detail-btn{
+	/* margin-left: 12px; */
+	height: fit-content;
+	margin-top: 50px;
+}
+.order-btn{
+	text-align: center;
+	display: block;
+	margin: 5px auto 0 auto;
+	width: 170px;
+	height: 45px;
+	line-height: 45px;
+	font-size:20px;
+	font-weight: 500;
+	color: #35363a;
+	border: solid 1px #8D959C;
+	background-color: #fff;
+}
+.order-btn:hover{
+	background-color: #5a7d59;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}
+/**주문확인 페이지*/
+#personal-info{
+	line-height: 1.5;
+	font-size: 20px;
+}
+#recipient-info, .recipient-receiveMethod{
+	font-size: 20px;
+	line-height: 1.5;
+}
+.recipient-receiveMethod{
+ 	margin-bottom: 5px;
+ 	border: 1px solid #8D959C;
+}
+#recipient{
+	margin-top: 10px;
+}
+#orderDetail-img{
+	width: 200px;
+	height: 270px;
+}
+.orderDetail{
+	display: flex;
+}
+
+.recipient-info>span{
+	font-size: 20px;
+	line-height: 35px;
+}
+#order-price-area{
+	width: fit-content;
+	margin: 10px auto;
+}
+#order-totPrice{
+	font-size: 30px;
+}

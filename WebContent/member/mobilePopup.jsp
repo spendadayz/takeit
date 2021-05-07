@@ -23,7 +23,8 @@
 	<table>
 		<tr>
 			<td>
-			    <input type="text" id="send"> <input type="button" value="전달하기" onclick="getParentText()"><br>
+			    <input type="text" id="send" readonly="readonly"> 
+			    <input type="button" value="전달하기" onclick="getParentText()"><br>
 			</td>
 			<td>
 		    	<input type="button" value="인증번호받기" onclick="getMobileNum()">

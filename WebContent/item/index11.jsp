@@ -12,9 +12,8 @@
 
 <head>
 
-
-
 <meta charset="UTF-8">
+
 
 <title>인덱스</title>
 </head>
@@ -28,9 +27,9 @@
 	 
 		 <a href="/takeit/item/reviewController?action=reviewList">후기전체조회</a>
 		
-		 <a href="/takeit/item/reviewController?action=updateReviewForm">내가 쓴 후기조회</a>
+		 <a href="/takeit/item/reviewController?action=myReviewList">내가 쓴 후기조회</a>
 		
-		<a href="/takeit/item/itemController?action=updateItemForm">판매자 등록 상품보기 </a>
+		<a href="/takeit/item/itemController?action=myitemList">판매자 등록 상품보기 </a>
 			
 	
 		

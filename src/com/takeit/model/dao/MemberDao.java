@@ -33,7 +33,7 @@ public class MemberDao {
 		String date = Utility.getCurrentDate("yyyy.MM.dd HH:mm:ss");
 		
 		try {
-			stmt = con.prepareStatement(sql);
+			stmt = con.prepareStatement(sql);			
 			
 			stmt.setString(1, member.getMemberId());
 			stmt.setString(2, member.getMemberPw());
@@ -47,18 +47,16 @@ public class MemberDao {
 			stmt.setString(10, "G");
 			stmt.setInt(11, 1000); 
 			stmt.setString(12, member.getBirth());
-			//throw new SQLException();
+
 			int row = stmt.executeUpdate();
 			
 			if (row == 0) {
 				throw new Exception();
-			}
-			
+			}		
 		} catch (Exception e) {
-			e.printStackTrace();
-			
-			MessageEntity message = new MessageEntity("error",1);
-			message.setUrl("/memberInput.jsp");
+			e.printStackTrace();		
+			MessageEntity message = new MessageEntity("error",33);
+			message.setUrl("/takeit/member/memberInput.jsp");
 			message.setLinkTitle("뒤로가기");
 			throw new CommonException(message);
 		}finally {
@@ -100,11 +98,9 @@ public class MemberDao {
 				member.setMemberLocNo(rs.getString("member_loc_no"));
 				member.setShopLocCode(rs.getString("shop_loc_code"));
 			}
-		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			
+		} catch (SQLException e) {		
 			e.printStackTrace();
-			MessageEntity message = new MessageEntity("error",0);
+			MessageEntity message = new MessageEntity("error",34);
 			message.setUrl("/takeit/member/memberLogin.jsp");
 			message.setLinkTitle("뒤로가기");
 			throw new CommonException(message);
@@ -136,10 +132,8 @@ public class MemberDao {
 				member.setEntryDate(rs.getString("entry_date"));
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
 			e.printStackTrace();
-			
-			MessageEntity message = new MessageEntity("error",6);
+			MessageEntity message = new MessageEntity("error",35);
 			message.setUrl("/takeit/member/memberFindId.jsp");
 			message.setLinkTitle("뒤로가기");
 			throw new CommonException(message);
@@ -177,10 +171,8 @@ public class MemberDao {
 				member.setMemberPw(temporaryPw);
 			}
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
 			e.printStackTrace();
-
-			MessageEntity message = new MessageEntity("error",6);
+			MessageEntity message = new MessageEntity("error",36);
 			message.setUrl("/takeit/member/memberFindPw.jsp");
 			message.setLinkTitle("뒤로가기");
 			throw new CommonException(message);
@@ -195,6 +187,7 @@ public class MemberDao {
 	 * @throws CommonException 
 	 */
 	public boolean memberIdChk(Connection con, String memberId) throws CommonException {
+
 		String sql = "select member_id from member where member_Id= ?";
 
 		PreparedStatement stmt = null;
@@ -205,15 +198,47 @@ public class MemberDao {
 			stmt.setString(1, memberId);
 			
 			rs = stmt.executeQuery();
+			
 			if (rs.next()) {
 				return false;
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
+			MessageEntity message = new MessageEntity("error",37);
+			message.setUrl("/takeit/member/memberInput.jsp");
+			message.setLinkTitle("뒤로가기");
+			throw new CommonException(message);
+		}finally {
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(stmt);
+		}
+		return true;
+	}
+
+	/**
+	 * 이메일 중복체크
+	 * @throws CommonException 
+	 */
+	public boolean memberEmailChk(Connection con, String email) throws CommonException {
+		String sql = "select email from member where email= ?";
+		
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, email);
 			
-			MessageEntity message = new MessageEntity("error", 6);
+			rs = stmt.executeQuery();
 			
+			if (rs.next()) {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			MessageEntity message = new MessageEntity("error",38);
+			message.setUrl("/takeit/member/memberInput.jsp");
+			message.setLinkTitle("뒤로가기");
 			throw new CommonException(message);
 		}finally {
 			JdbcTemplate.close(rs);

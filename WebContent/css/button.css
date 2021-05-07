@@ -20,17 +20,52 @@
 	font-weight: 600;
 	cursor: pointer;
 }
-
+/**back to top*/
 #to-top{
 	position: fixed;
 	bottom: 10px;
 	right: 10px;
 	cursor: pointer;
-	height: 35px;
+	height: 30px;
 }
 #to-top:hover{
 	opacity: 0.35;
 }
+/**floating banner*/
+#cart-icon {
+	position: fixed;
+	top: 250px;
+	right: 10px;
+	cursor: pointer;
+	max-width: 2%;
+ 	height: auto !important;
+}
+#cart-icon:hover{
+	opacity: 0.35;
+}
+#bill {
+	position: fixed;
+	top: 340px;
+	right: 10px;
+	cursor: pointer;
+	max-width: 2%;
+ 	height: auto !important;
+}
+#bill:hover{
+	opacity: 0.35;
+}
+#pay {
+	position: fixed;
+	top: 430px;
+	right: 10px;
+	cursor: pointer;
+	max-width: 2%;
+ 	height: auto !important;
+}
+#pay:hover{
+	opacity: 0.35;
+}
+/**small btn*/
 #small-btn{
 	width: 1050px;
 	text-align: right;
@@ -38,6 +73,7 @@
 #small-btn>a{
 	border: solid 1px #8D959C;
 	color: #000;
+	background-color: white;
 	text-decoration: none;
 	padding: 7px 25px 7px 25px;
 }
@@ -54,7 +90,12 @@
 	color: #000;
 	text-decoration: none;
 	padding: 7px 25px 7px 25px;
+	background-color: white;
+	margin-bottom: 10px;
+	margin-right: 5px;
+	margin-left: 5px;
 }
+
 .btn:hover{
 	background-color: #5a7d59;
 	color: #fff;

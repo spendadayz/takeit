@@ -56,7 +56,7 @@ $(document).ready(function() {
 
 	/* 회원가입 이동 이벤트 */
 	$("#inputSeller").click(function() {
-		location.href = "/takeit/member/sellerInput.jsp"
+		location.href = "/takeit/seller/controller?action=sellerInputForm"
 	});
 	
 	/* 일반 로그인 이벤트 */

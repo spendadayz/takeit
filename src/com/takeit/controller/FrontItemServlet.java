@@ -14,12 +14,15 @@ import javax.servlet.http.HttpSession;
 
 import com.takeit.common.CommonException;
 import com.takeit.model.biz.ItemBiz;
+import com.takeit.model.biz.ReviewBiz;
 import com.takeit.model.dto.Item;
 import com.takeit.model.dto.MessageEntity;
+import com.takeit.model.dto.Review;
 
 
 /**
  * 상품관리를 위한 FrontController servlet
+ * @author 김효원
  */
 @WebServlet("/item/itemController")
 public class FrontItemServlet extends HttpServlet {
@@ -56,15 +59,15 @@ public class FrontItemServlet extends HttpServlet {
 			case "deleteItem":
 				deleteItem(request, response);
 				break;
-			case "SellerItemForm":
-				SellerItemForm(request,response);
+			case "sellerItemForm":
+				sellerItemForm(request,response);
 				break;
-				//		case "SellerItemForm":
-				//			SellerItemForm(request,response);
-				//				break;
-				//		case "SellerItemForm":
-				//			SellerItemForm(request,response);
-				//				break;
+			case "myitemList":
+				myitemList(request,response);
+				break;
+//			case "setReviewInfo":
+//				setReviewInfo(request,response);
+//				break;
 		}
 	}
 	
@@ -202,32 +205,6 @@ public class FrontItemServlet extends HttpServlet {
 				return;
 			}       
 	          
-//			   Item dto = new Item(itemCategoryName, sellerId, itemName, itemPrice, itemOrigin,itemStock,itemImg,
-//					   itemTakeIt,packTypeName,expirationDate,notice,freshPercent);
-//			       
-//
-//		ItemBiz biz = new ItemBiz();
-//
-//	      try {
-//	          biz.addItem(dto);
-//	          
-//	          MessageEntity message = new MessageEntity("success", 0);
-//	          message.setUrl("/exercise/exe02/teacher/login.html");
-//	          message.setLinkTitle("");
-//	          request.setAttribute("message", message);
-//	          RequestDispatcher rd = request.getRequestDispatcher("/exe02/teacher/message.jsp");
-//	          rd.forward(request, response);
-//	       } catch (CommonException e) {
-//	          MessageEntity message = e.getMessageEntity();
-//	       
-//	          message.setLinkTitle("상품등록");
-//	          message.setUrl(CONTEXT_PATH + "/exe02/controller?action=enrollItemForm");
-//	          request.setAttribute("message", message);
-//	          request.getRequestDispatcher("/takeit/item/message.jsp").forward(request, response);
-//	          
-//	       }
-//	       
-//	    }
 	}
 	//상품등록요청
 		protected void itemEnrollForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -260,20 +237,7 @@ public class FrontItemServlet extends HttpServlet {
 			}
 		
 }
-//		
-//		
-//		protected void itemList1(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//
-//			ArrayList<Item> itemList = new ArrayList<Item>();
-//			ItemBiz biz = new ItemBiz();
-//			try {
-//				biz.getItemList(itemList);
-//			} catch (CommonException e) {
-//				e.printStackTrace();
-//			}
-//			request.setAttribute("itemList", itemList);
-//			request.getRequestDispatcher("/takeit/item/itemList.jsp").forward(request, response);
-//		}		
+	
 	
 
 		/**
@@ -292,37 +256,7 @@ public class FrontItemServlet extends HttpServlet {
 			ItemBiz biz = new ItemBiz();
 		}	
 
-		/**
-		 * 판매자 등록 상품 조회
-		 * @param request
-		 * @param response
-		 * @throws ServletException
-		 * @throws IOException
-		 */
-		protected void SellerItemForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-//			HttpSession session = request.getSession(false);
-			
-//			String sellerId = (String)session.getAttribute("sellerId");
-//			String sellerId = request.getParameter("sellerId");
-			String sellerId = "seller04";
-			
-			ItemBiz biz = new ItemBiz();
-			
-			Item dto = new Item();
-		   dto.setSellerId(sellerId);
-			try {
-				biz.getSellItem(dto);
-				request.setAttribute("item", dto);
-				request.getRequestDispatcher("/item/sellerItem.jsp").forward(request, response);
-			
-			}catch (Exception e) {
-				System.out.println(e.getMessage());
-				e.printStackTrace();
-				
-			}
-		}	
-		
+
 		/**
 		 * 상품상세조회
 		 * @param request
@@ -333,27 +267,80 @@ public class FrontItemServlet extends HttpServlet {
 		protected void itemDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			String itemNo = request.getParameter("itemNo");
 			System.out.println("itemNo = "+itemNo);
-		
-			
 			ItemBiz biz = new ItemBiz();
-			
+
 			Item dto = new Item();
 			dto.setItemNo(itemNo);
 			try {
 				biz.getItem(dto);
 				System.out.println("dto.판매자 = "+ dto.getSellerName());
 				System.out.println("dto= "+ dto);
-				
+
 				request.setAttribute("item", dto);
 				request.getRequestDispatcher("/item/itemDetail.jsp").forward(request, response);
 			} catch (CommonException e) {
 				e.printStackTrace();
 			}
-			
-			
+
+
 		}		
+		/**
+		 * 판매자 등록상품전체조회
+		 * @param request
+		 * @param response
+		 * @throws ServletException
+		 * @throws IOException
+		 */
+		protected void myitemList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			HttpSession session = request.getSession();
+			MessageEntity message = null;
+			
+			String sellerId = (String)session.getAttribute("sellerId"); // String
 		
+			ArrayList<Item> itemList = new ArrayList<Item>();
+			ItemBiz abiz = new ItemBiz();
+			try {
+				abiz.getMySellList(itemList, sellerId);
+				System.out.println("itemList = "+itemList);
 		
+				if(itemList != null) {
+					request.setAttribute("itemList",itemList);
+					request.getRequestDispatcher("/item/mySellList.jsp").forward(request, response);
+				}
+			} catch (CommonException e) {
+				 message = new MessageEntity("error", 24);
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("/message.jsp").forward(request, response);
+			}
+
+}
+		
+/**
+ * 판매자 등록 상품 조회요청		
+ */
+		protected void sellerItemForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
+			String itemNo = request.getParameter("itemNo");
+			System.out.println("itemNo = " +itemNo);
+			ItemBiz  biz = new ItemBiz ();
+
+			Item dto = new Item();
+			dto.setItemNo(itemNo);
+
+			try {
+				biz.searchSell(dto, itemNo);
+				if(dto.getItemName() != null) {
+					request.setAttribute("item", dto);
+					request.getRequestDispatcher("/item/sellInfo.jsp").forward(request, response);
+				}
+			} catch (CommonException e) {
+				MessageEntity message = new MessageEntity("error", 8);
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("/message.jsp").forward(request, response);
+			}
+
+		}
+			
 //		/**
 //		 *등록 상품수정
 //		 * @param request

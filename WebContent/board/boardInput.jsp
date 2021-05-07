@@ -90,5 +90,9 @@
 <input type="submit" value="등록" class="link">
 </form>
 <div id="cancle" class="link">취소</div>
+<!-- floating Banner -->
+<jsp:include page="/common/floatingBanner.jsp"></jsp:include>
+<!-- scroll function -->
+<jsp:include page="/common/back_to_top.jsp"></jsp:include>
 </body>
 </html>

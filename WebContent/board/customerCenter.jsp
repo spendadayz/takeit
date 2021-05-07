@@ -31,5 +31,9 @@
 	<a href="/takeit/boardController?action=boardList&boardCategory=2" class="link">자주하는 질문</a>
 	<a href="/takeit/boardController?action=boardList&boardCategory=3" class="link">상품문의</a>
 </div>
+<!-- floating Banner -->
+<jsp:include page="/common/floatingBanner.jsp"></jsp:include>
+<!-- scroll function -->
+<jsp:include page="/common/back_to_top.jsp"></jsp:include>
 </body>
 </html>

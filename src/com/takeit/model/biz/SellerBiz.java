@@ -80,4 +80,60 @@ public class SellerBiz {
 			JdbcTemplate.close(con);
 		}
 	}
+	
+	/**
+	 * 아이디 중복체크
+	 * @throws CommonException 
+	 */
+	public int idCheck(String sellerId) throws CommonException{
+		Connection con = JdbcTemplate.getConnection();
+		boolean result = dao.sellerIdChk(con, sellerId);
+		JdbcTemplate.close(con);
+		if (result) {
+			return 1;
+		}
+		return 0;
+	}
+	
+	/**
+	 * 이메일 중복체크
+	 * @throws CommonException 
+	 */
+	public int emailCheck(String email) throws CommonException{
+		Connection con = JdbcTemplate.getConnection();
+		boolean result = dao.sellerEmailChk(con, email);
+		JdbcTemplate.close(con);
+		if (result) {
+			return 1;
+		}
+		return 0;
+	}
+
+	/**
+	 * 아이디 중복체크
+	 * @throws CommonException 
+	 */
+	public int sellerNoChk(String sellerNo) throws CommonException{
+		Connection con = JdbcTemplate.getConnection();
+		boolean result = dao.sellerNoChk(con, sellerNo);
+		JdbcTemplate.close(con);
+		if (result) {
+			return 1;
+		}
+		return 0;
+	}
+	
+	/**
+	 * 상점명 중복체크
+	 * @throws CommonException 
+	 */
+	public int shopNameChk(String shopName) throws CommonException{
+		Connection con = JdbcTemplate.getConnection();
+		boolean result = dao.shopNameChk(con, shopName);
+		JdbcTemplate.close(con);
+		if (result) {
+			return 1;
+		}
+		return 0;
+	}
 }

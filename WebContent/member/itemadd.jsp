@@ -47,11 +47,13 @@
 				<td><input type="text" id="itemPrice"  name="itemPrice"  placeholder="판매가" required="required">
 				</td>
 			</tr>
+			
 			<tr>
 				<th>판매단위</th>
 				<td><input type="text" id="salesUnit" name="salesUnit"  placeholder="판매단위" >
 				</td>
 			</tr>
+			
 			<tr>
 				<th>상품카테고리이름</th>
 				<td>
@@ -65,6 +67,7 @@
 					</select>
 				</td>
 			</tr>
+			
 			<tr>
 				<th>재고량</th>
 				<td><input type="text" id="itemStock" name="itemStock"  placeholder="재고량" required="required">
@@ -77,14 +80,12 @@
 				<td><input type="text" id="itemOrigin" name="itemOrigin"  placeholder="원산지" required="required">
 				</td>
 			</tr>
-
 			
 			<tr>
 				<th>상품이미지</th>
 				<td><input type="file" name="itemImg" placeholder="상품이미지">
 				</td>
 			</tr>
-	
 
 			<tr>
 				<th>잇거래여부</th>
@@ -95,10 +96,9 @@
 				</select></td>
 			</tr>
 			
-				
 			<tr>
 				<th>판매자</th>
-				<td><input type="text" id="sellerId" name="sellerId"  placeholder="판매자" value="${seller.sellerId }">
+				<td><input type="text" id="sellerId" name="sellerId"  placeholder="판매자" value="${sellerId }">
 				</td>
 			</tr>
 
@@ -110,7 +110,9 @@
 			</tr>
 		</table>
 	<br></form>
-		
+		<div id="myInfo_btn">
+			<input id = "mypage_btn" class="inline" type="button" value="등록 취소" onclick="location.href='/takeit/member/myPage.jsp'">
+	</div>
 	</div>
 	<!-- scroll function -->
 	<jsp:include page="/common/back_to_top.jsp"></jsp:include>
