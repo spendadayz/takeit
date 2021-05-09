@@ -21,8 +21,7 @@ public class OrderBiz {
 
 	/**
 	 * 주문 등록
-	 * @param order 주문 객체
-	 * @throws CommonException 
+	 * @param orderList 주문목록
 	 */
 	public void addOrder(ArrayList<Order> orderList) throws CommonException {
 		OrderDao dao = OrderDao.getInstance();
@@ -45,6 +44,7 @@ public class OrderBiz {
 					takeitDao.selectLoc(conn, order.getMemberId(), takeit);
 					takeitDao.selectTakeitNo(conn, takeit);
 					takeitDao.insertTakeitDetail(conn, takeit, order);
+					takeitDao.updateTakeitCurrPrice(conn, takeit, order);
 				}
 				for (OrderDetail orderDetail : order.getOrderDetails()) {
 					CartDao.getInstance().removeCart(conn, order.getMemberId(), orderDetail.getItemNo());

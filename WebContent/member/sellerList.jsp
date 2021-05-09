@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="/common/taglib_menu.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +25,6 @@
 <!-- 네비게이션 -->
 <jsp:include page="/common/navigation.jsp"></jsp:include>
 <br>
-
 	<h1 style="width:fit-content; margin: 0 auto;">판매자 회원 목록</h1>
 	<br>
 	<table id="memberList_table">
@@ -49,7 +48,6 @@
 		</tr>
 		<c:forEach var="dto" items="${ sellerList}">
 		<tr>
-		
 			<td>
 				${ dto.getSellerId()}
 			</td>
@@ -99,15 +97,9 @@
 				<input type="button" value="탈퇴" id="deleteBtn" onclick="location.href='${CONTEXT_PATH}/member/mypageController?action=AceRemoveSeller&sellerId=${ dto.getSellerId()}&sellerPw=${ dto.getSellerPw()}'">
 			</td>
 		</tr>
-		
 		</c:forEach>
-	
 	</table>
-
-<a href="/takeit/member/myPage.jsp" id="mypage_Btn">마이페이지로 이동</a>
-
-
-
+<a href="${CONTEXT_PATH}/member/myPage.jsp" id="mypage_Btn">마이페이지로 이동</a>
 
  <!-- footer 구역 -->
 <jsp:include page="/common/footer.jsp"></jsp:include>

@@ -18,6 +18,7 @@ import com.takeit.model.dto.MessageEntity;
 import com.takeit.model.dto.Review;
 
 /**
+ * 시작페이지 dao
  * @author 한소희
  *
  */

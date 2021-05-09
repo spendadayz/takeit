@@ -1,26 +1,51 @@
 package com.takeit.model.dto;
 
+/** 장바구니
+ * @author 한소희
+ *  
+ */
 public class Cart {
+	/** 회원아이디, session에 저장된 memberId, 필수 */
 	private String memberId;
+	/** 장바구니 상품번호, request에 저장된 itemNo, 필수 */
 	private String itemNo;
+	/** 장바구니 상품명, itemNo로 자동 호출, 필수 */
 	private String itemName;
+	/** 장바구니 상품 이미지, itemNo로 자동호출, 필수 */
 	private String itemImg;
+	/** 장바구니 상품 판매자 아이디, itemNo로 자동호출, 필수 */
 	private String sellerId;
+	/** 장바구니 상품 판매자 이름, sellerId로 자동호출, 필수 */
 	private String sellerName;
+	/** 장바구니 상품 수량, 사용자 입력, 기본값 1, 필수 */
 	private int cartItemQty;
+	/** 장바구니 상품 판매가, itemNo로 자동호출, 필수  */
 	private int itemPrice;
+	/** 장바구니 배달료 적용 가격, itemPrice로 연산, 필수*/
 	private int totalPrice;
-	private int cartTotalPrice; //전체 구매 금액
+	/** 장바구니 전체 결제 금액, itemPrice*cartitemQty+배달료, 필수 */
+	private int cartTotalPrice; 
 	
 	public Cart() {}
 
-	/**장바구니 등록*/
+	/***
+	 * 장바구니 등록 
+	 * @param memberId 		회원 아이디
+	 * @param itemNo		상품 번호
+	 * @param cartItemQty	장바구니 상품 수량
+	 */
 	public Cart(String memberId, String itemNo, int cartItemQty) {
 		this.memberId = memberId;
 		this.itemNo = itemNo;
 		this.cartItemQty = cartItemQty;
 	}
 
+	/***
+	 * @param memberId 		회원 아이디
+	 * @param itemNo		상품번호
+	 * @param itemImg		상품 이미지
+	 * @param cartItemQty	장바구니 상품 수량
+	 */
 	public Cart(String memberId, String itemNo, String itemImg, int cartItemQty) {
 		super();
 		this.memberId = memberId;
@@ -29,6 +54,12 @@ public class Cart {
 		this.cartItemQty = cartItemQty;
 	}
 
+	/***
+	 * @param itemName		상품명
+	 * @param sellerName	판매자이름
+	 * @param cartItemQty	장바구니 상품 수량
+	 * @param totalPrice	장바구니 총 결제금액
+	 */
 	public Cart(String itemName, String sellerName, int cartItemQty, int totalPrice) {
 		super();
 		this.itemName = itemName;

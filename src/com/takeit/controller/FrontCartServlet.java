@@ -18,12 +18,12 @@ import com.takeit.model.dto.MessageEntity;
 
 /**
  * 장바구니 관리 컨트롤러
+ * @author 한소희
  */
 @WebServlet("/cartController")
 public class FrontCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	//서버 구동시에 해당 어플리케이션당 한 개의 환경설정, 모든 서블릿(jsp)공유객체, 서버 종료시까지 사용
 		public ServletContext application;
 		public String CONTEXT_PATH;
 		
@@ -52,10 +52,9 @@ public class FrontCartServlet extends HttpServlet {
 			case "changeCartQty":
 				changeCartQty(request,response);
 				break;
-//			case "":
-//				(request,response);
-//				break;
-				
+			default:
+				response.sendRedirect(CONTEXT_PATH + "/index");
+				break;
 			}
 		}
 
@@ -142,10 +141,15 @@ public class FrontCartServlet extends HttpServlet {
 			ArrayList<Cart> cartList = new ArrayList<Cart>();
 			
 			try {
+				int result = cbiz.searchCartItem(itemNo, memberId);
 				int cartTotalPrice =  0;
-				cbiz.addCart(cart);
+				if(result == 1) {
+					cbiz.cartUpdate(cart);
+				} else {
+					cbiz.addCart(cart);
+				}
 				cbiz.getCartList(memberId, cartTotalPrice, cartList);
-
+				
 				session.setAttribute("cartList", cartList);
 				for(Cart dto : cartList) {
 					cartTotalPrice += dto.getTotalPrice();
@@ -162,8 +166,7 @@ public class FrontCartServlet extends HttpServlet {
 				request.getRequestDispatcher("/message.jsp").forward(request, response);
 			}
 		}
-
-
+		
 		/**장바구니 삭제*/
 		protected void removeCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			System.out.println("[dubug]장바구니 삭제 요청");

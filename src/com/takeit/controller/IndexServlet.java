@@ -17,6 +17,7 @@ import com.takeit.model.dto.Review;
 
 /**
  * index 시작페이지 요청 서블릿
+ * @author 한소희
  */
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {

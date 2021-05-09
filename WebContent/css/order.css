@@ -11,8 +11,9 @@
 	margin: 0 auto;
 	font-size: 30px;
 }
-order-info>span{
-	font-size: 14px;
+.order-info>span{
+	font-size: 17px;
+	line-height: 1.4;
 }
 /**주문버튼*/
 .cancle-btn{
@@ -43,12 +44,11 @@ order-info>span{
 .order-detail{
 	display: inline-block;
 	margin-top: 20px;
-	width: 300px;
+	width: 400px;
 }
 .order-detail>span{
 	font-size: 20px;
 	line-height: 1.7;
-
 }
 /**주문내역 버튼영역*/
 .order-detail-btn{
@@ -109,4 +109,13 @@ order-info>span{
 }
 #order-totPrice{
 	font-size: 30px;
+}
+/**판매자 판매내역*/
+#sellerOrder-wrap{
+	width: 1050px;
+	display: flex;
+	margin: 0 auto;
+}
+.orderList-wrap{
+	margin-top: 30px;
 }

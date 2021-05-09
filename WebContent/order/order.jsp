@@ -10,6 +10,19 @@
 <link type="text/css" rel="stylesheet" href="/takeit/css/order.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript">
+var goPopup = function() {
+	 var pop = window.open("${CONTEXT_PATH}/member/jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes");
+ } 
+var jusoCallBack = function(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo){
+	 document.getElementById("recipientPostNo").value = zipNo; 
+	 document.getElementById("recipientAddr").value = roadAddrPart1; 
+	 document.getElementById("recipientAddrDetail").value = addrDetail; 
+	 if(addressDetail.length>30){ 
+		alert('상세주소를 30자 이내로 입력하세요.'); 
+		return; 
+	} 
+}
+
 $(document).ready(function() {
 	$("#receiveMethod1").click(function() {
 		$("#recipientName").val("${order.recipientName}");
@@ -34,7 +47,6 @@ $(document).ready(function() {
 		$("#shipRequest").val("").attr("disabled", true);
 	});
 });
-	
 </script>
 </head>
 <body>
@@ -82,14 +94,14 @@ $(document).ready(function() {
 				<span><b>배송요청사항</b></span>
 			</div>
 			<div class="recipient-info" style="margin-left: 10px;">
-				<span><input type="text" name="recipientName"  class="recipient-receiveMethod" value="${order.recipientName}"></span><br>
-				<span><input type="text" name="recipientMobile"  class="recipient-receiveMethod" value="${order.recipientMobile}"></span><br>
-				<span><input type="text" id="recipientPostNo"  class="recipient-receiveMethod" name="recipientPostNo" value="${order.recipientPostNo}"></span><br>
-				<input type="text" id="recipientAddr" name="recipientAddr"  class="recipient-receiveMethod" value="${order.recipientAddr}"><br>
+				<span><input type="text" id="recipientName" name="recipientName"  class="recipient-receiveMethod" value="${order.recipientName}"></span><br>
+				<span><input type="text" id="recipientMobile" name="recipientMobile"  class="recipient-receiveMethod" value="${order.recipientMobile}"></span><br>
+				<span><input type="text" id="recipientPostNo" readonly="readonly" class="recipient-receiveMethod" name="recipientPostNo" value="${order.recipientPostNo}"></span><input type="button" id="postNoBtn" name="postNoBtn" class="small-btn" onclick="goPopup();" value="주소검색" /> <br>
+				<input type="text" id="recipientAddr" readonly="readonly" name="recipientAddr"  class="recipient-receiveMethod" value="${order.recipientAddr}"><br>
 				<input type="text" id="recipientAddrDetail" name="recipientAddrDetail"  class="recipient-receiveMethod" value="${order.recipientAddrDetail}"><br>
 				<span><input type="text" id="shipRequest" name="shipRequest"  class="recipient-receiveMethod" value="${order.shipRequest}"></span>
 			</div>
-			</div> 
+			</div>
 		</div>
 	<hr style="border-top-width: 3px;">	
 	
@@ -109,7 +121,7 @@ $(document).ready(function() {
 					<c:choose>
 						<c:when test="${orderDetail.itemTakeit == 'T' }">무료(잇거래)<c:set var="totalPrice" value="${totalPrice + (orderDetail.itemQty*orderDetail.itemPayPrice) }"/></c:when>
 						<c:when test="${orderDetail.itemPayPrice * orderDetail.itemQty >= 50000}">무료<c:set var="totalPrice" value="${totalPrice + (orderDetail.itemQty*orderDetail.itemPayPrice) }"/></c:when>
-						<c:when test="${orderDetai.itemTakeit == 'F' and orderDetail.itemPayPrice * orderDetail.itemQty < 50000 }">3500원<c:set var="totalPrice" value="${totalPrice + (orderDetail.itemQty*orderDetail.itemPayPrice)+3500}"/></c:when>
+						<c:when test="${orderDetail.itemTakeit == 'F' and orderDetail.itemPayPrice * orderDetail.itemQty < 50000 }">3500원<c:set var="totalPrice" value="${totalPrice + (orderDetail.itemQty*orderDetail.itemPayPrice)+3500}"/></c:when>
 					</c:choose></span><br>
 					<span><b>상품결제금액 :</b> ${orderDetail.itemPayPrice * orderDetail.itemQty}원</span> <br> 
 				</div>
@@ -129,7 +141,7 @@ $(document).ready(function() {
 			<c:if test=""></c:if>
 			<span id="order-totPrice">
 				<b>총 주문금액 :</b> 
-				<span style="font-weight: 700; font-size:35px;  color: red;">&#8361;<fmt:formatNumber value="${totalPrice}" pattern="###,###"/></span> 
+				<span style="font-weight: 700; font-size:35px;  color: red;">&#8361;<fmt:formatNumber value="${totalPrice}"  pattern="###,###"/></span> 
 			</span>
 			<input type="submit" class="link" value="결제하기"/>
 			</div>

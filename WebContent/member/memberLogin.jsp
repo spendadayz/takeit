@@ -12,10 +12,10 @@
 <script type="text/javascript" src="${CONTEXT_PATH}/js/member/login.js"></script>
 <!-- 카카오 스크립트 -->
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<!-- 카카오 로그인 -->
 <script>
 Kakao.init('4a836a6d7613b825e60dc25d5b9d8a82'); //발급받은 키 중 javascript키를 사용해준다.
 console.log(Kakao.isInitialized()); // sdk초기화여부판단
+<!-- 카카오 로그인 -->
 function kakaoLogin() {
     Kakao.Auth.login({
       scope: 'account_email',
@@ -53,14 +53,10 @@ function kakaoLogin() {
 	<!-- 로그인 후 메뉴 -->
 	<jsp:include page="/common/after_login_menu.jsp"></jsp:include>	
 </c:if>
-
-
 <!-- logo.jsp 삽입 -->
 <jsp:include page="/common/logo.jsp"></jsp:include>
-
 <!-- 네비게이션 -->
 <jsp:include page="/common/navigation.jsp"></jsp:include>
-
 <!-- 내용 -->
 <div id="contents_box" align="center">
 <table>
@@ -77,7 +73,13 @@ function kakaoLogin() {
 		<td><input type="text" placeholder="고객님의 아이디를 입력해주세요" id="memberId" name="memberId" required="required"/></td>
 	</tr>
 	<tr>
-		<td><input type="password" placeholder="고객님의 비밀번호를 입력해주세요" id="memberPw" name="memberPw" required="required"/></td>
+		<td>
+			<input type="password" placeholder="고객님의 비밀번호를 입력해주세요" id="memberPw" name="memberPw" required="required"/>
+		</td>
+		<td>
+			<input type="checkbox" id="pwCheckbox" name="pwCheckbox" onclick="pwCheckbox_onclick()"/>
+			<label for="pwCheckbox"></label>
+		</td>
 	</tr>
 	<tr>
 		<td id="find" align="right">

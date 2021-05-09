@@ -73,7 +73,8 @@ public class TakeitBiz {
 		Connection conn = JdbcTemplate.getConnection();
 		
 		try {
-		dao.searchTakeitItemList(conn, shopLocCode, takeitItemList);
+			dao.searchTakeitItemList(conn, shopLocCode, takeitItemList);
+			
 		} catch(CommonException e) {
 			throw e;
 		} finally {
@@ -86,7 +87,8 @@ public class TakeitBiz {
 		Connection conn = JdbcTemplate.getConnection();
 		
 		try {
-		dao.searchTakeitItemList(conn, takeitItemList);
+			dao.searchTakeitItemList(conn, takeitItemList);
+			
 		} catch(CommonException e) {
 			throw e;
 		} finally {
@@ -100,7 +102,8 @@ public class TakeitBiz {
 		Connection conn = JdbcTemplate.getConnection();
 		
 		try {
-		dao.searchTakeitItemList(conn, member, takeitItemList);
+			dao.searchTakeitItemList(conn, member, takeitItemList);
+			
 		} catch(CommonException e) {
 			throw e;
 		} finally {
@@ -109,12 +112,17 @@ public class TakeitBiz {
 	}
 	
 	/** 잇거래 상품 상세조회 */
-	public void getTakeitItem(TakeitItem takeitItem) throws CommonException {
+	public void getTakeitItem(String shopLocCode, TakeitItem takeitItem) throws CommonException {
 		TakeitDao dao = TakeitDao.getInstance();
 		Connection conn = JdbcTemplate.getConnection();
 		
 		try {
 			dao.searchTakeitItem(conn, takeitItem);
+			dao.searchshopLocName(conn, takeitItem);
+			if (takeitItem.getShopLocCode().equals(shopLocCode)) {
+				dao.selectTakeitNo(conn, takeitItem);
+				dao.searchTakeitCurrPrice(conn, takeitItem);
+			}
 		} catch (CommonException e) {
 			throw e;
 		} finally {
@@ -127,6 +135,9 @@ public class TakeitBiz {
 	 * @param member 회원객체
 	 */
 	public void addMemberLocNo(Member member) throws CommonException {
+		member.setMemberLocNo(null);
+		member.setShopLocCode(null);
+		
 		HashMap<String, String> latLng = Utility.getLatlng(member.getAddress());
 		String _lat = latLng.get("lat");
 		String _lng = latLng.get("lng");
@@ -144,6 +155,7 @@ public class TakeitBiz {
 		try {
 			dao.searchShopLocList(conn, shopLocList);
 		} catch (CommonException e) {
+			e.printStackTrace();
 			throw e;
 		} finally {
 			JdbcTemplate.close(conn);
@@ -176,14 +188,15 @@ public class TakeitBiz {
 		locLng += 0.05;
 		memberLocNo += (int)(locLat*100);
 		member.setMemberLocNo(memberLocNo);
-		
 		conn = JdbcTemplate.getConnection();
 		try {
 			boolean result = dao.isValidMemberLocNo(conn, member);
 			if (!result) {
 				dao.addMemberLocNo(conn, member);
+				JdbcTemplate.commit(conn);
 			}
 		} catch (CommonException e) {
+			JdbcTemplate.rollback(conn);
 			throw e;
 		} finally {
 			JdbcTemplate.close(conn);
@@ -271,7 +284,131 @@ public class TakeitBiz {
 		}
 	}
 
+	/**
+	 * 상점구역 삭제
+	 * @param shopLocList 상점구역목록
+	 */
+	public void deleteShopLoc(Takeit takeit) throws CommonException {
+		TakeitDao dao = TakeitDao.getInstance();
+		Connection conn = JdbcTemplate.getConnection();
 
+		try {
+			dao.updateMemberLocNull(conn, takeit);
+			dao.deleteShopLoc(conn, takeit);
+			JdbcTemplate.commit(conn);
+		} catch (CommonException e) {
+			JdbcTemplate.rollback(conn);
+			throw e;
+		} finally {
+			JdbcTemplate.close(conn);
+		}
+	}
+	
+	public void getTakeitExpiredList(ArrayList<Takeit> takeitList) throws CommonException {
+		TakeitDao dao = TakeitDao.getInstance();
+		Connection conn = JdbcTemplate.getConnection();
+		
+		try {
+			dao.searchTakeitExpiredList(conn, takeitList);
+		} catch (CommonException e) {
+			throw e;
+		} finally {
+			JdbcTemplate.close(conn);
+		}
+	}
+	public void getTakeitLiveList(ArrayList<Takeit> takeitList) throws CommonException {
+		TakeitDao dao = TakeitDao.getInstance();
+		Connection conn = JdbcTemplate.getConnection();
+		
+		try {
+			dao.searchTakeitLiveList(conn, takeitList);
+		} catch (CommonException e) {
+			throw e;
+		} finally {
+			JdbcTemplate.close(conn);
+		}
+	}
 
+	public void getTakeitDeadList(ArrayList<Takeit> takeitList) throws CommonException {
+		TakeitDao dao = TakeitDao.getInstance();
+		Connection conn = JdbcTemplate.getConnection();
+		
+		try {
+			dao.searchTakeitDeadList(conn, takeitList);
+		} catch (CommonException e) {
+			throw e;
+		} finally {
+			JdbcTemplate.close(conn);
+		}
+		
+	}
 
+	public void getTakeitAllList(ArrayList<Takeit> takeitList) throws CommonException {
+		TakeitDao dao = TakeitDao.getInstance();
+		Connection conn = JdbcTemplate.getConnection();
+		
+		try {
+			dao.searchTakeitAllList(conn, takeitList);
+		} catch (CommonException e) {
+			throw e;
+		} finally {
+			JdbcTemplate.close(conn);
+		}
+	}
+
+	public void deleteTakeit(ArrayList<String> takeitNoList) throws CommonException {
+		TakeitDao dao = TakeitDao.getInstance();
+		Connection conn = JdbcTemplate.getConnection();
+		
+		try {
+			for (String takeitNo : takeitNoList) {
+				dao.deleteTakeit(conn, takeitNo);
+			}
+			JdbcTemplate.commit(conn);
+		} catch (CommonException e) {
+			JdbcTemplate.rollback(conn);
+			throw e;
+		} finally {
+			JdbcTemplate.close(conn);
+		}
+	}
+
+	public int takeitItemListCount() throws CommonException {
+		TakeitDao dao = TakeitDao.getInstance();
+		Connection conn = JdbcTemplate.getConnection();
+		
+		try {
+			return dao.selectTakeitItemListCount(conn);
+		} catch (CommonException e) {
+			throw e;
+		} finally {
+			JdbcTemplate.close(conn);
+		}
+	}
+	
+	public int takeitItemListCount(Member member) throws CommonException {
+		TakeitDao dao = TakeitDao.getInstance();
+		Connection conn = JdbcTemplate.getConnection();
+		
+		try {
+			return dao.selectTakeitItemListCount(conn, member);
+		} catch (CommonException e) {
+			throw e;
+		} finally {
+			JdbcTemplate.close(conn);
+		}
+	}
+	
+	public int takeitItemListCount(String shopLocCode) throws CommonException {
+		TakeitDao dao = TakeitDao.getInstance();
+		Connection conn = JdbcTemplate.getConnection();
+		
+		try {
+			return dao.selectTakeitItemListCount(conn, shopLocCode);
+		} catch (CommonException e) {
+			throw e;
+		} finally {
+			JdbcTemplate.close(conn);
+		}
+	}
 }

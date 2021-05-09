@@ -2,7 +2,6 @@ package com.takeit.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -11,12 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.takeit.common.CommonException;
-import com.takeit.model.biz.ItemBiz;
-import com.takeit.model.biz.MemberBiz;
 import com.takeit.model.biz.SellerBiz;
 import com.takeit.model.biz.TakeitBiz;
 import com.takeit.model.dto.MessageEntity;
@@ -77,6 +73,9 @@ public class FrontSellerServlet extends HttpServlet {
 		case "sellerNoChk":
 			sellerNoChk(request, response);
 			break;
+		default:
+			response.sendRedirect(CONTEXT_PATH + "/index");
+			break;
 		}
 	}
 	
@@ -92,13 +91,19 @@ public class FrontSellerServlet extends HttpServlet {
 	 * 회원가입 폼
 	 */
 	protected void sellerInputForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		TakeitBiz takeitBiz = new TakeitBiz();
 		ArrayList<ShopLoc> shopLocList = new ArrayList<>();
 		
+		SellerBiz sellerBiz = new SellerBiz();
+		ArrayList<Seller> shopCategoryList = new ArrayList<Seller>();
+		
 		try {
 			takeitBiz.getShopLocList(shopLocList);
+			sellerBiz.shopCategoryList(shopCategoryList);
 			
 			request.setAttribute("shopLocList", shopLocList);
+			request.setAttribute("shopCategoryList", shopCategoryList);
 			request.getRequestDispatcher("/seller/sellerInput.jsp").forward(request, response);
 		} catch (CommonException e) {
 			MessageEntity message = e.getMessageEntity();
@@ -107,6 +112,9 @@ public class FrontSellerServlet extends HttpServlet {
 			request.setAttribute("message", message);
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 		}
+		
+
+	
 	}
 	
 	/**

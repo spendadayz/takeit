@@ -202,7 +202,7 @@ public class ReviewDao {
 	 * @throws CommonException 
 	 */
 	public void updateReview (Connection conn, Review dto) throws CommonException{
-		String sql = "update review set  review_title=? ,review_contents=?,review_score=?where member_id=? ";
+		String sql = "update review set  review_title=? ,review_contents=? ,review_score=? where member_id=? and review_no=?";
 
 		PreparedStatement stmt = null;
 
@@ -212,6 +212,7 @@ public class ReviewDao {
 			stmt.setString(2, dto.getReviewContents());
 			stmt.setInt(3, dto.getReviewScore());
 			stmt.setString(4, dto.getMemberId());
+			stmt.setString(5, dto.getReviewNo());
 
 
 			int result =stmt.executeUpdate();
@@ -245,14 +246,17 @@ public class ReviewDao {
 		String sql = "delete from review where member_id=? and review_No=?";
 
 		PreparedStatement stmt = null;
-	
+				
 		try {
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, reviewNo);
-			stmt.setString(2, memberId);
+			stmt.setString(1, memberId);
+			stmt.setString(2, reviewNo);
 
-			stmt.executeUpdate();
-
+			int rows = stmt.executeUpdate();
+			
+			if(rows ==0) {
+				throw new Exception();
+			}
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();

@@ -5,6 +5,7 @@ import java.sql.Connection;
 import com.takeit.common.CommonException;
 import com.takeit.common.JdbcTemplate;
 import com.takeit.model.dao.MemberDao;
+import com.takeit.model.dao.TakeitDao;
 import com.takeit.model.dto.Member;
 
 /**
@@ -28,6 +29,7 @@ public class MemberBiz {
 		 try {
 			dao.addMember(con, member);
 			takeitBiz.addMemberLocNo(member); 
+			TakeitDao.getInstance().updateMemberLoc(con, member);
 			JdbcTemplate.commit(con);
 		} catch (CommonException e) {
 			e.printStackTrace();

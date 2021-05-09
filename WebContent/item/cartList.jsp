@@ -73,7 +73,13 @@
 				&#8361;<fmt:formatNumber value="<%= cart.getTotalPrice()+3500 %>" pattern="###,###"/>
 				</span>
 			</div><br>
-			<form action="" method="post">
+			<form action="${CONTEXT_PATH}/order/orderController?action=orderForm" method="post">
+				<input type="hidden" value="<%=cart.getItemNo()%>" name="itemNo"> 
+				<input type="hidden" value="<%=cart.getCartItemQty()%>" name="itemQty" > 
+				<input type="hidden" value="<%=cart.getItemPrice()%>" name="itemPrice" > 
+				<input type="hidden" value="<%=cart.getTotalPrice()%>" name="totalPrice" > 
+				<input type="hidden" value="${cartTotalPrice}" name="cartTotalPrice" id="cartTotalPrice"> 				
+				
 				<input type="submit" value="구매" class="small-btn" style="margin-bottom: 10px;">
 			</form>
 			<form action="/takeit/cartController?action=removeCart&itemNo=<%= cart.getItemNo() %>" method="post">
@@ -107,7 +113,7 @@
 <!-- 전체구매버튼 클릭시  -->
 <form id="buyAllItem" action="${CONTEXT_PATH}/order/orderController?action=orderForm" method="post">
 <c:forEach items="${cartList}" var="cart">
-	<input type="hidden" value="${cart.itemNo}" name="itemNo" id="${cart.itemNo}no"> 
+	<input type="hidden" value="${cart.itemNo}" name="itemNo" id="${cart.itemNo}"> 
 	<input type="hidden" value="${cart.cartItemQty}" name="itemQty" id="${cart.itemNo}qty"> 
 	<input type="hidden" value="${cart.itemPrice}" name="itemPrice" id="${cart.itemNo}price"> 
 	<input type="hidden" value="${cart.totalPrice}" name="totalPrice" id="${cart.itemNo}totalPrice"> 

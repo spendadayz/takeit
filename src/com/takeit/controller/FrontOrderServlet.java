@@ -71,6 +71,9 @@ public class FrontOrderServlet extends HttpServlet {
 		case "orderForm":
 			orderForm(request, response);
 			break;
+		default:
+			response.sendRedirect(CONTEXT_PATH + "/index");
+			break;
 		}
 	}
 	
@@ -92,7 +95,6 @@ public class FrontOrderServlet extends HttpServlet {
 		String[] itemNos = request.getParameterValues("itemNo");
 		String[] itemQtys = request.getParameterValues("itemQty");
 		String[] itemPayPrices = request.getParameterValues("itemPrice");
-		//String[] totalPrices = request.getParameterValues("totalPrice");
 		
 		Order order = new Order();
 		ArrayList<OrderDetail> orderDetails = new ArrayList<>();
@@ -174,6 +176,11 @@ public class FrontOrderServlet extends HttpServlet {
 		ArrayList<OrderDetail> orderDetails = null;
 		OrderDetail orderDetail = null;
 		for (int index = 0; index < itemNos.length; index++) {
+			System.out.println(itemNos[index]);
+			System.out.println(sellerIds[index]);
+			System.out.println(itemPayPrices[index]);
+			System.out.println(itemQtys[index]);
+			
 			order = new Order();
 			orderDetails = new ArrayList<>();
 			orderDetail = new OrderDetail();
@@ -190,7 +197,6 @@ public class FrontOrderServlet extends HttpServlet {
 				}
 			}
 			if (orderDetails.isEmpty()) {
-				orderDetail = new OrderDetail();
 				orderDetail.setSellerId(sellerIds[index]);
 				orderDetail.setItemNo(itemNos[index]);
 				orderDetail.setItemQty(Integer.valueOf(itemQtys[index]));
@@ -213,7 +219,7 @@ public class FrontOrderServlet extends HttpServlet {
 				order.setShipStatusCode(shipStatusCode);
 				
 				orderList.add(order);
-			}
+			} 
 		}
 		OrderBiz biz = new OrderBiz();
 		try {
@@ -305,8 +311,8 @@ public class FrontOrderServlet extends HttpServlet {
 		
 		if (orderNo == null || orderNo.trim().length() == 0) {
 			MessageEntity message = new MessageEntity("error", 12);
-			message.setLinkTitle("마이페이지");
-			//message.setUrl(CONTEXT_PATH + "/order/orderController?action=");
+			message.setLinkTitle("판매목록");
+			message.setUrl(CONTEXT_PATH + "/order/orderController?action=sellerOrderList");
 			request.setAttribute("message", message);
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 			return;
@@ -347,7 +353,7 @@ public class FrontOrderServlet extends HttpServlet {
 		if (orderNo == null || orderNo.trim().length() == 0) {
 			MessageEntity message = new MessageEntity("error", 12);
 			message.setLinkTitle("마이페이지");
-			//message.setUrl(CONTEXT_PATH + "/order/orderController?action=");
+			message.setUrl(CONTEXT_PATH + "/member/myPage.jsp");
 			request.setAttribute("message", message);
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 			return;
@@ -362,8 +368,8 @@ public class FrontOrderServlet extends HttpServlet {
 		} catch (CommonException e) {
 			response.getWriter().write("failed");
 			MessageEntity message = e.getMessageEntity();
-			message.setLinkTitle("마이페이지");
-			//message.setUrl(CONTEXT_PATH + "/");
+			message.setLinkTitle("주문내역");
+			message.setUrl(CONTEXT_PATH + "/order/orderController?action=memberOrderList");
 			request.setAttribute("message", message);
 			request.getRequestDispatcher("/message.jsp").forward(request, response);
 			return;

@@ -11,6 +11,11 @@ import com.takeit.common.JdbcTemplate;
 import com.takeit.model.dto.Cart;
 import com.takeit.model.dto.MessageEntity;
 
+/**
+ * 장바구니 dao
+ * @author 한소희
+ *
+ */
 public class CartDao {
 	private static CartDao instance = new CartDao();
 	private CartDao() {}
@@ -153,6 +158,67 @@ public class CartDao {
 	public void changeCartQty(Connection con, Cart cart) throws CommonException {
 		System.out.println("[debug] 장바구니 수량변경 dao 요청");
 		String sql = "UPDATE CART SET CART_ITEM_QTY=? WHERE MEMBER_ID=? AND ITEM_NO=?";
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, cart.getCartItemQty());
+			pstmt.setString(2, cart.getMemberId());
+			pstmt.setString(3, cart.getItemNo());
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			
+			MessageEntity message = new MessageEntity("error",20);
+			message.setLinkTitle("장바구니");
+			message.setUrl("/takeit/item/cartList.jsp");
+			throw new CommonException(message);
+		} finally {
+			JdbcTemplate.close(pstmt);
+		}
+		
+	}
+	
+	/** 장바구니 중복 여부 검사*/
+	public int searchCartItem(Connection con, String itemNo, String memberId) throws CommonException {
+		System.out.println("[debug] 장바구니 아이템 중복 검사 dao 요청");
+		String sql = "SELECT * FROM CART WHERE MEMBER_ID=? AND ITEM_NO=?";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, itemNo);
+			rs= pstmt.executeQuery();
+			
+			if(rs.next()) {
+				return 1;
+			}
+			System.out.println("[debug] 장바구니 아이템 중복 검사 dao 요청 완료");
+			
+		} catch (SQLException e) {
+			System.out.println("[debug] 장바구니 아이템 중복 검사 dao 요청 실패");
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			MessageEntity message = new MessageEntity("error",21);
+			message.setLinkTitle("메인으로");
+			message.setUrl("/takeit/index");
+			throw new CommonException(message);
+		} finally{
+			JdbcTemplate.close(rs);
+			JdbcTemplate.close(pstmt);
+		}
+		return 0;
+	}
+	
+	/**장바구니 수량 변경 추가*/
+	public void cartUpdate(Connection con, Cart cart) throws CommonException {
+		System.out.println("[debug] 장바구니 수량변경 dao 요청");
+		String sql = "UPDATE CART SET CART_ITEM_QTY=CART_ITEM_QTY+? WHERE MEMBER_ID=? AND ITEM_NO=?";
 		
 		PreparedStatement pstmt = null;
 		

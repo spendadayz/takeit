@@ -120,7 +120,7 @@ $(document).ready(function() {
 						<span>${order.shopName}(${order.sellerId})</span>
 					</div>
 					<div class="order-detail-btn">
-						<input type="button" value="상품 후기" class="order-btn"  style="margin-bottom: 5px;" >
+						<input type="button" value="상품 후기" class="order-btn"  style="margin-bottom: 5px;" onclick="location.href='/takeit/item/reviewController?action=enrollReviewForm&sellerId=${memberId}&itemNo=${order.orderNo}'">
 						<input type="button" value="상품 문의" class="order-btn" onclick="location.href='/takeit/boardController?action=boardList&boardCategory=3'">
 					</div>
 				</div>
