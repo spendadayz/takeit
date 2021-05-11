@@ -21,6 +21,9 @@ import com.takeit.model.dto.ShopLoc;
 
 /**
  * 판매자 회원관리 컨트롤러
+ * @author  임우진
+ * @since   jdk1.8
+ * @version v2.0
  */
 @WebServlet(urlPatterns = {"/seller/controller"})
 public class FrontSellerServlet extends HttpServlet {
@@ -29,10 +32,12 @@ public class FrontSellerServlet extends HttpServlet {
 
 	public ServletContext application;
 	public String CONTEXT_PATH;
+	public String imgPath;
 	
 	public void init() {
 		application = getServletContext();
 		CONTEXT_PATH = (String) application.getAttribute("CONTEXT_PATH");	
+		imgPath = (String)application.getAttribute("imgPath");
 	}	 
 	
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -124,7 +129,7 @@ public class FrontSellerServlet extends HttpServlet {
 		
 		System.out.println("작동확인 : sellerInput");
 		
-		String directory = "C:/student_ucamp33/workspace_takeit/takeit/WebContent/img/seller";
+		String directory = imgPath+"/takeit/img/seller";
 		int maxSize = 1024 * 1024 * 100;
 		String encoding = "UTF-8";
 		System.out.println(directory);

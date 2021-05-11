@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * </pre>
  * @author 김태경
  * @since jdk1.8
- * @version ver.1.0
+ * @version v2.0
  */
 public class Order implements Serializable {
 	/** 잇거래여부, 필수, ('T', 'F') */

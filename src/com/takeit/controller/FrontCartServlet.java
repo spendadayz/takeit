@@ -18,7 +18,9 @@ import com.takeit.model.dto.MessageEntity;
 
 /**
  * 장바구니 관리 컨트롤러
- * @author 한소희
+ * @author 	한소희
+ * @since	jdk1.8
+ * @version v2.0
  */
 @WebServlet("/cartController")
 public class FrontCartServlet extends HttpServlet {
@@ -72,7 +74,7 @@ public class FrontCartServlet extends HttpServlet {
 		protected void cartList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			System.out.println("[dubug]장바구니 전체 목록 요청");
 			HttpSession session = request.getSession(false);
-			if(session.getAttribute("memberId") == null) {
+			if(session == null || session.getAttribute("memberId") == null) {
 				MessageEntity message = new MessageEntity("message" , 0);
 				message.setLinkTitle("로그인");
 				message.setUrl("/takeit/member/memberLogin.jsp");
@@ -93,17 +95,23 @@ public class FrontCartServlet extends HttpServlet {
 				int cartTotalPrice =  0;
 				cbiz.getCartList(memberId, cartTotalPrice, cartList);
 				session.setAttribute("cartList", cartList);
+				boolean isNotTakeit = false;
 				for(Cart dto : cartList) {
 					cartTotalPrice += dto.getTotalPrice();
+					System.out.println("isTakeit:"+dto.getItemTakeit());
+					if (dto.getItemTakeit().equals("F")) {
+						isNotTakeit = true;
+					}
 				}
-				if(cartTotalPrice < 50000 && cartTotalPrice > 0) {
-					session.setAttribute("cartTotalPrice", cartTotalPrice+3500);
+				
+				if(cartTotalPrice < 50000 && cartTotalPrice > 0 && isNotTakeit) {
+					session.setAttribute("cartTotalPrice", cartTotalPrice + 3500);
 				} else if(cartTotalPrice == 0){
 					session.setAttribute("cartTotalPrice", 0);
 				} else {
 					session.setAttribute("cartTotalPrice", cartTotalPrice);
 				}
-				System.out.println("[debug] servlet 누적 총 결제 금액= " + cartTotalPrice);
+				System.out.println("[debug] servlet 누적 총 결제 금액= " + (int)session.getAttribute("cartTotalPrice"));
 				request.getRequestDispatcher("/item/cartList.jsp").forward(request, response);
 			} catch (CommonException e) {
 				MessageEntity message = new MessageEntity("error", 21);
@@ -149,12 +157,16 @@ public class FrontCartServlet extends HttpServlet {
 					cbiz.addCart(cart);
 				}
 				cbiz.getCartList(memberId, cartTotalPrice, cartList);
-				
+				boolean isNotTakeit = false;
 				session.setAttribute("cartList", cartList);
 				for(Cart dto : cartList) {
 					cartTotalPrice += dto.getTotalPrice();
+					if (dto.getItemTakeit().equals("F")) {
+						isNotTakeit = true;
+					}
 				}
-				if(cartTotalPrice < 50000 && cartTotalPrice > 0) {
+				
+				if(cartTotalPrice < 50000 && cartTotalPrice > 0 && isNotTakeit) {
 					session.setAttribute("cartTotalPrice", cartTotalPrice+3500);
 				} else if(cartTotalPrice == 0){
 					session.setAttribute("cartTotalPrice", 0);

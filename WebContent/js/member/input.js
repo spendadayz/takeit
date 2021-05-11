@@ -341,7 +341,7 @@ $(document).ready(function() {
 		$("#sellerNo").css({
 			'background' : "#E8F0FE"
 		});
-		$('#sellerNoResult1').show().html("* -포함 13자리를 입력하세요. ex) 000-00-00000<br>");
+		$('#sellerNoResult1').show().html("* -포함 12자리를 입력하세요. ex) 000-00-00000<br>");
 		$('#sellerNoResult2').show().html("* 사업자등록번호 중복확인");
 	});
 	/* 사업자등록번호 포커스 아웃*/
@@ -355,11 +355,11 @@ $(document).ready(function() {
 		var sellerNo = $("#sellerNo").val();
 		var sellerNo_Valid = sellerNo_data(sellerNo)
 		if(sellerNo_Valid) {
-			$('#sellerNoResult1').show().html("o -포함 13자리를 입력하세요. ex) 000-00-00000<br>");
+			$('#sellerNoResult1').show().html("o -포함 12자리를 입력하세요. ex) 000-00-00000<br>");
 			$('#sellerNoResult1').css('color','#08A600')
 			$("#sellerNoBtn").prop('disabled', false);
 		}else {
-			$('#sellerNoResult1').show().html("x -포함 13자리를 입력하세요. ex) 000-00-00000<br>");
+			$('#sellerNoResult1').show().html("x -포함 12자리를 입력하세요. ex) 000-00-00000<br>");
 			$('#sellerNoResult1').css('color','#FF0000')
 			$("#sellerNoBtn").prop('disabled', true);
 		} 
@@ -463,7 +463,7 @@ $(document).ready(function() {
 	
 	/* 아이디 : 6~20자 영문+숫자를 조합, 중복확인*/
 	function memberId_data(take) {
-	 	var pattern = new RegExp(/^[a-zA-Z0-9]{6,20}$/);
+	 	var pattern = new RegExp(/^[a-zA-Z][a-zA-Z0-9]{5,19}$/);
 	  	return pattern.test(take);
 	}
 	/* 비밀번호 : 8~20자 영대소문자+숫자 조합 */

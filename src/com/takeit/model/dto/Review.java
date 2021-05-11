@@ -6,11 +6,12 @@ package com.takeit.model.dto;
 import java.io.Serializable;
 
 /**
+ * 후기
  * @author 김효원
- *
+ * @since jdk1.8
+ * @version v2.0
  */
 public class Review implements Serializable{
-	
 	/**후기 번호:시스템 자동부여*/
 	private String reviewNo;
 	

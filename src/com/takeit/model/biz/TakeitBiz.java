@@ -17,6 +17,8 @@ import com.takeit.util.Utility;
 /**
  * 잇거래 업무처리 위한 TakeitBiz 클래스
  * @author 김태경
+ * @since jdk1.8
+ * @version v2.0 2021/05/10
  */
 public class TakeitBiz {
 	
@@ -304,6 +306,7 @@ public class TakeitBiz {
 		}
 	}
 	
+	/** 만료된 잇거래 목ㅁ록 조회 */
 	public void getTakeitExpiredList(ArrayList<Takeit> takeitList) throws CommonException {
 		TakeitDao dao = TakeitDao.getInstance();
 		Connection conn = JdbcTemplate.getConnection();
@@ -316,6 +319,8 @@ public class TakeitBiz {
 			JdbcTemplate.close(conn);
 		}
 	}
+	
+	/** 진행중인 잇거래 목록 조회 */
 	public void getTakeitLiveList(ArrayList<Takeit> takeitList) throws CommonException {
 		TakeitDao dao = TakeitDao.getInstance();
 		Connection conn = JdbcTemplate.getConnection();
@@ -329,6 +334,7 @@ public class TakeitBiz {
 		}
 	}
 
+	/** 종료된 잇거래 목록 조회 */
 	public void getTakeitDeadList(ArrayList<Takeit> takeitList) throws CommonException {
 		TakeitDao dao = TakeitDao.getInstance();
 		Connection conn = JdbcTemplate.getConnection();
@@ -343,6 +349,7 @@ public class TakeitBiz {
 		
 	}
 
+	/** 잇거래 목록 전체 조회*/
 	public void getTakeitAllList(ArrayList<Takeit> takeitList) throws CommonException {
 		TakeitDao dao = TakeitDao.getInstance();
 		Connection conn = JdbcTemplate.getConnection();
@@ -356,6 +363,7 @@ public class TakeitBiz {
 		}
 	}
 
+	/** 잇거래 삭제 */
 	public void deleteTakeit(ArrayList<String> takeitNoList) throws CommonException {
 		TakeitDao dao = TakeitDao.getInstance();
 		Connection conn = JdbcTemplate.getConnection();
@@ -373,6 +381,7 @@ public class TakeitBiz {
 		}
 	}
 
+	/** 비회원 잇거래 상품개수 조회*/
 	public int takeitItemListCount() throws CommonException {
 		TakeitDao dao = TakeitDao.getInstance();
 		Connection conn = JdbcTemplate.getConnection();
@@ -386,6 +395,7 @@ public class TakeitBiz {
 		}
 	}
 	
+	/** 회원 잇거래상품개수 조회*/
 	public int takeitItemListCount(Member member) throws CommonException {
 		TakeitDao dao = TakeitDao.getInstance();
 		Connection conn = JdbcTemplate.getConnection();
@@ -399,6 +409,7 @@ public class TakeitBiz {
 		}
 	}
 	
+	/** 판매자 잇거래 상품개수 조회*/
 	public int takeitItemListCount(String shopLocCode) throws CommonException {
 		TakeitDao dao = TakeitDao.getInstance();
 		Connection conn = JdbcTemplate.getConnection();

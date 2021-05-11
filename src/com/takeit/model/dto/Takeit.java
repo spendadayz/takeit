@@ -1,40 +1,41 @@
 package com.takeit.model.dto;
 
+import java.io.Serializable;
+
 /**
  * <pre>
  * 잇거래 도메인 클래스
  * </pre>
  * @author 김태경
  * @since jdk1.8
- * @version ver.1.0
+ * @version v2.0
  */
-public class Takeit {
-	
-	/**잇거래번호:필수입력*/
+public class Takeit implements Serializable {
+	/** 잇거래번호 : 필수, 시스템 자동 입력 */
 	private String takeitNo;
 	
-	/**상점구역코드:필수*/
+	/** 상점구역코드 : 필수 */
 	private String shopLocCode;
 	
-	/**상점명:필수*/
+	/** 상점명 : 필수 */
 	private String shopLocName;
 	
-	/**회원구역번호:(구역번호:29,30),필수입력 */
+	/** 회원구역번호 : 필수 */
 	private String memberLocNo;
 	
-	/**모집금액:모집금액 :100만원,필수입력*/
+	/** 모집금액 : 필수 */
 	private int takeitPrice;
 	
-	/**현재 모집된 금액:필수*/
+	/** 현재 모집된 금액 : 필수 */
 	private int takeitCurrPrice;
 	
-	/**모집시작일자:takeit등록일자 */
+	/** 모집시작일자 : 필수 */
 	private String takeitDate;
 	
-	/**모집마감일자:100만원 충족 or 등록후 7일 경과,필수입력 */
+	/** 모집마감일자: 모집시작일자+7 */
 	private String takeitEndDate;
 	
-	/**잇거래진행여부:DEFAULT 'T',필수입력*/
+	/** 잇거래진행여부 : 필수 */
 	private String takeitAlive;
 
 	

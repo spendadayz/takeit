@@ -8,7 +8,7 @@ import java.io.Serializable;
  * </pre>
  * @author 김태경
  * @since jdk1.8
- * @version ver.1.0
+ * @version v2.0
  */
 public class OrderDetail implements Serializable {
 	/** 주문 상품 번호, 사용자 입력, 필수 */

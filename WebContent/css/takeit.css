@@ -264,27 +264,28 @@ input[type="number"]::-webkit-inner-spin-button {
 	color: #35363a;
 	border: solid 1px #8D959C;
 	background-color: #fff;
-	float: right;
-    margin-right: 50px;
-    margin-bottom: 25px;
+	vertical-align: middle;
 }
 .takeitMgr-del-btn:hover{
 	background-color: #5a7d59;
 	color: #fff;
 	font-weight: 600;
 	cursor: pointer;
+	
 }
 .takeitMgr-table, #takeitMgr-tr>th,
 .takeitMgr-table>th, .takeitMgr-table>td{
 	border: 1px solid grey;
 	border-collapse: collapse;
 }
-
+.takeitMgr-table>td{
+	height: 55px;
+	line-height: 55px;
+	vertical-align: middle;
+}
 #takeitMgr-tr{
 	position: absolute;
     top: 313px;
-    width: 880px;
-    border: 1px solid grey;
 	border-collapse: collapse;
 }
 

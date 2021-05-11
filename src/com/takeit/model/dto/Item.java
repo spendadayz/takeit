@@ -6,11 +6,12 @@ package com.takeit.model.dto;
 import java.io.Serializable;
 
 /**
+ * 상품
  * @author 김효원
- *
+ * @since jdk1.8
+ * @version v2.0
  */
 public class Item implements Serializable{
-
 	/**포장타입번호:(re789,ic789,ro123,el456),필수입력*/
 	private String packTypeNo;
 

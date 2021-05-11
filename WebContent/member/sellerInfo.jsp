@@ -18,6 +18,7 @@ function updateInfoCheck(){
 		document.getElementById('infoUpdate').submit();
 		return true;
 	}else{
+		location.reload();
 		return false;
 	}
 	

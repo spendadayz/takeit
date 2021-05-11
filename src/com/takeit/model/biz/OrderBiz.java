@@ -16,9 +16,10 @@ import com.takeit.model.dto.Takeit;
 /**
  * 주문 업무처리 위한 OrderBiz 클래스
  * @author 김태경
+ * @since jdk1.8
+ * @version v2.0 2021/05/10
  */
 public class OrderBiz {
-
 	/**
 	 * 주문 등록
 	 * @param orderList 주문목록
@@ -151,8 +152,6 @@ public class OrderBiz {
 			JdbcTemplate.close(conn);
 		}
 	}
-  
-
 
 	/** 주문 정보 조회 */
 	public void getOrderItem(Order order) throws CommonException {

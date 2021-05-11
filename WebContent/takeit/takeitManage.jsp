@@ -22,6 +22,15 @@
 </script>
 </head>
 <body>
+<c:if test="${empty dto || empty dto.grade != 'A'}">
+	<jsp:useBean id="message" class="com.takeit.model.dto.MessageEntity" scope="request" />
+	<jsp:setProperty property="type" name="message" value="message"/>
+	<jsp:setProperty property="index" name="message" value="2"/>
+	<jsp:setProperty property="url" name="message" value="${CONTEXT_PATH}/index"/>
+	<jsp:setProperty property="linkTitle" name="message" value="처음으로"/>
+	<jsp:forward page="/message.jsp"/>
+</c:if>
+
 	<!-- 상단 메뉴 -->
 	<c:if test="${empty memberId and empty sellerId}">
 		<!-- 로그인 전 메뉴 -->
@@ -55,20 +64,20 @@
 		<div id="takeitManage-wrap">
 			<div>
 				<div class="takeitMgr-title">
-					<h1>만료된 잇거래 목록</h1>
+					<h1>잇거래 목록</h1>
 				</div>
 
 				<form action="/takeit/takeit/takeitController?action=takeitManageForm" method="post" id="takeitListForm">
 					<input type="radio" class="takeitRange" id="takeitRangeall"	value="all" name="takeitRange">전체
 					<input type="radio"	class="takeitRange" id="takeitRangelive" value="live" name="takeitRange">진행중
 					<input type="radio" class="takeitRange" id="takeitRangeexpired" value="expired"	name="takeitRange">만료
-					<input type="radio" class="takeitRange" id="takeitRangedead" value="dead" name="takeitRange">삭제
+					<input type="radio" class="takeitRange" id="takeitRangedead" value="dead" name="takeitRange">종료
 				</form>
 				<form action="${CONTEXT_PATH}/takeit/takeitController?action=takeitDelete&takeitRange=${takeitRange}" method="post">
 				<c:forEach var="takeit" items="${takeitList}">
 					<input type="hidden" value="${takeit.takeitNo}" name="takeitNo">
 				</c:forEach>
-					<input type="submit" class="takeitMgr-del-btn" value="전체삭제">
+					<input type="submit" class="takeitMgr-del-btn" style="float: right; margin-right: 50px;" value="전체종료">
 				</form>
 			</div>
 			<div>
@@ -83,7 +92,7 @@
 							<th style="width: 69px;">현재금액</th>
 							<th style="width: 69px;">목표금액</th>
 							<th style="width: 85.5px;">진행중여부</th>
-							<th style="width: 102px;">삭제하기</th>
+							<th style="width: 102px;">종료하기</th>
 						</tr>
 						<c:forEach var="takeit" items="${takeitList}">
 						
@@ -103,7 +112,7 @@
 								<td style="width: 102px;">
 									<form action="${CONTEXT_PATH}/takeit/takeitController?action=takeitDelete&takeitRange=${takeitRange}" method="post">
 										<input type="hidden" value="${takeit.takeitNo}" name="takeitNo">
-										<input type="submit" class="takeitMgr-del-btn" value="삭제">
+										<input type="submit" class="takeitMgr-del-btn" value="종료">
 									</form>
 								</td>
 							</tr>

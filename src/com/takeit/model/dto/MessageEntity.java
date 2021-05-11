@@ -71,6 +71,7 @@ public class MessageEntity {
 		error.add("[지역시장 중복 등록]"); //43
 		error.add("[등록상품 변경오류] "); 
 		error.add("[지역시장 삭제 오류]");
+		error.add("[주문 내역 없음]");
 
 		
 		
@@ -111,6 +112,7 @@ public class MessageEntity {
 		ArrayList<String> message = new ArrayList<String>();
 		message.add("[이 페이지는 로그인이 필요합니다.]");
 		message.add("[일반회원 전용]");
+		message.add("[관리자 전용]"); //2
 		
 		
 		messageList.put("error", error);

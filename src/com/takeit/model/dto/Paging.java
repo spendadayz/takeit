@@ -1,6 +1,11 @@
 package com.takeit.model.dto;
 
-/** 페이징 도메인 클래스 */
+/**
+ * 페이징 도메인 클래스
+ * @author 	한소희
+ * @since	jdk1.8
+ * @version v2.0
+ */
 public class Paging {
 	/** 내가 클릭한 페이지 번호 */
 	private int where = 1; 

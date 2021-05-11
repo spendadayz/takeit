@@ -31,7 +31,7 @@
 			
 			takeitTimeElement.innerHTML = "남은시간 : " +d1 + "일 "+ h1+"시간 "+m1+"분 "+s1 + "초"
 			
-			if (d1 <= 3) {
+			if (d1 < 3) {
 				console.log("d1="+d1);
 				$($(".takeitTime").get(i)).css("color", "red");
 			}

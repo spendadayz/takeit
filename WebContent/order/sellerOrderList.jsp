@@ -54,7 +54,7 @@ function updateShipStatus(orderNo, shipStatusCode) {
 	<jsp:setProperty property="index" name="message" value="0"/>
 	<jsp:setProperty property="url" name="message" value="${CONTEXT_PATH}/index"/>
 	<jsp:setProperty property="linkTitle" name="message" value="처음으로"/>
-	<jsp:forward page="/exe02/teacher/message.jsp"/>
+	<jsp:forward page="/message.jsp"/>
 </c:if>
 
 <!-- 상단 메뉴 -->
@@ -109,8 +109,8 @@ function updateShipStatus(orderNo, shipStatusCode) {
 						<span><input id="${order.orderNo}btn2" type="button" class="small-btn" value="배송상태변경" onclick="updateShipStatus('${order.orderNo}','${order.shipStatusCode}')"/></span>
 					</c:if>
 				</span>
-				
 				<br>
+				<span><b>주소 : </b>${order.recipientAddr }</span><br>
 				<span><b>요청사항 :</b><span style="text-decoration: underline;"> ${order.shipRequest}</span></span><br>
 			</div>
 			<c:forEach var="orderDetail" items="${order.orderDetails}">
@@ -121,7 +121,17 @@ function updateShipStatus(orderNo, shipStatusCode) {
 				<div class="order-detail">
 					<span><b>상품명 :</b>&emsp;&emsp;&emsp;&emsp; ${orderDetail.itemName}</span> <br>
 					<span><b>상품개수 :</b>&emsp;&emsp;&emsp; ${orderDetail.itemQty}개</span> <br>
-					<span><b>상품결제금액 :</b>&emsp; ${orderDetail.itemPayPrice * orderDetail.itemQty}원</span> <br> 
+					<c:choose>
+						<c:when test='${orderDetail.itemTakeit == "T" }'>
+							<span><b>결제금액 :</b> &emsp;<fmt:formatNumber type="number" value="${orderDetail.itemPayPrice * orderDetail.itemQty}"/>원</span><br>
+						</c:when>
+						<c:when test='${orderDetail.itemTakeit == "F" && (orderDetail.itemPayPrice * orderDetail.itemQty >= 50000) }'>
+							<span><b>결제금액 :</b> &emsp;<fmt:formatNumber type="number" value="${orderDetail.itemPayPrice * orderDetail.itemQty}"/>원</span><br>
+						</c:when>
+						<c:otherwise>
+							<span><b>결제금액 :</b> &emsp;<fmt:formatNumber type="number" value="${orderDetail.itemPayPrice * orderDetail.itemQty + 3500}"/>원</span><br>
+						</c:otherwise>
+					</c:choose>
 				</div><br>
 			</div>
 			</c:forEach>

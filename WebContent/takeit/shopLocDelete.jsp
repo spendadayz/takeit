@@ -13,19 +13,26 @@
 <script type="text/javascript">
 
 function shopLocDelete(){
-	
 	if(confirm("[ "+$("#shopLocCode option:checked").text()+" ]"+"을 삭제 하시겠습니까?") == true){
 		document.getElementById('shopLocDelete').submit();
 		return true;
 	}else{
 		return false;
 	}
-	
 }
 
 </script>
 </head>
 <body>
+<c:if test="${empty dto || empty dto.grade != 'A'}">
+	<jsp:useBean id="message" class="com.takeit.model.dto.MessageEntity" scope="request" />
+	<jsp:setProperty property="type" name="message" value="message"/>
+	<jsp:setProperty property="index" name="message" value="2"/>
+	<jsp:setProperty property="url" name="message" value="${CONTEXT_PATH}/index"/>
+	<jsp:setProperty property="linkTitle" name="message" value="처음으로"/>
+	<jsp:forward page="/message.jsp"/>
+</c:if>
+
 <!-- 상단 메뉴 -->
 <c:if test="${empty memberId and empty sellerId}">
 	<!-- 로그인 전 메뉴 -->

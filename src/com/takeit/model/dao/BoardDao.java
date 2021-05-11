@@ -17,8 +17,9 @@ import com.takeit.model.dto.MessageEntity;
 
 /**
  * 게시글 dao
- * @author 한소희
- *
+ * @author 	한소희
+ * @since	jdk1.8
+ * @version v2.0
  */
 public class BoardDao {
 	private static BoardDao instance = new BoardDao();

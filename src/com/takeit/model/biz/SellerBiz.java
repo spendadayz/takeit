@@ -1,14 +1,17 @@
 package com.takeit.model.biz;
 import java.sql.Connection;
+
 import java.util.ArrayList;
 import com.takeit.common.CommonException;
 import com.takeit.common.JdbcTemplate;
 import com.takeit.model.dao.SellerDao;
 import com.takeit.model.dto.Seller;
+
 /**
- * 회원가입 : 판매자회원
- * @author 임우진
- * 
+ * 판매자 회원관리 서비스
+ * @author  임우진
+ * @since   jdk1.8
+ * @version v2.0
  */
 public class SellerBiz {
 

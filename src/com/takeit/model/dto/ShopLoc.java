@@ -8,26 +8,25 @@ import java.io.Serializable;
  * </pre>
  * @author 김태경
  * @since jdk1.8
- * @version ver.1.0
+ * @version v2.0
  */
 public class ShopLoc implements Serializable{
 	
-	/* 상점구역코드 : 필수데이터, 중복불가 */
+	/** 상점구역코드 : 필수데이터, 중복불가 */
 	private String shopLocCode;
 	
-	/* 상점구역이름 : 필수데이터 */
+	/** 상점구역이름 : 필수데이터 */
 	private String shopLocName;
 	
-	/* 위도 : 필수데이터 */
+	/** 위도 : 필수데이터 */
 	private String shopLocLat;
 	
-	/* 경도 : 필수데이터 */
+	/** 경도 : 필수데이터 */
 	private String shopLocLng;
 	
 	
 	/** 기본 생성자 */
 	public ShopLoc() {	}
-
 	
 	/**
 	 * 전체 데이터 초기화 생성자
@@ -44,6 +43,7 @@ public class ShopLoc implements Serializable{
 		this.shopLocLng = shopLocLng;
 	}
 
+	
 	public String getShopLocCode() {
 		return shopLocCode;
 	}

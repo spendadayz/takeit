@@ -1,9 +1,9 @@
 package com.takeit.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.takeit.common.CommonException;
 import com.takeit.model.biz.ItemBiz;
 import com.takeit.model.dto.Item;
@@ -30,12 +32,14 @@ public class FrontItemServlet extends HttpServlet {
 	//서버구동시에 해당 어플리케이션당 한개의 한개의 환경설정 
 		public ServletContext application;
 		public String CONTEXT_PATH;
-		
+		public String imgPath;
 		public void init() {
 			application = getServletContext();
 			CONTEXT_PATH = application.getContextPath();
 			System.out.println("[loadOnStartup]CONTEXT_PATH : " + CONTEXT_PATH);
 			application.setAttribute("CONTEXT_PATH", CONTEXT_PATH);
+			imgPath = "C:/student_ucamp33/apps_down/05.tomcat/apache-tomcat-8.5.64/webapps";
+			application.setAttribute("imgPath", imgPath);
 		}
 		
 
@@ -84,136 +88,123 @@ public class FrontItemServlet extends HttpServlet {
 		process(request, response);
 	}
 	
-	//상품등록 페이지 요청 서비스
+	/**
+	 * 상품 등록 요청 서비스
+	 */
 	protected void itemEnroll(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String itemCategoryName = request.getParameter("itemCategoryName");
-		String sellerId = request.getParameter("sellerId");
-		String itemName = request.getParameter("itemName");
-		String itemPrice = request.getParameter("itemPrice");
-		String itemOrigin = request.getParameter("itemOrigin");
-		String itemStock = request.getParameter("itemStock");
-		String itemImg = request.getParameter("itemImg");
-		String itemTakeIt = request.getParameter("itemTakeIt");
-		String packTypeName = request.getParameter("packTypeName");
-		String expirationDate = request.getParameter("expirationDate");
-		String notice = request.getParameter("notice");
-		String freshPercent = request.getParameter("freshPercent");
+		String directory = imgPath+"/takeit/img/item";
+		int maxSize = 1024 * 1024 * 100;
+		String encoding = "UTF-8";
+		System.out.println(directory);
+		MultipartRequest multi
+		= new MultipartRequest(request, directory, maxSize, encoding,
+				new DefaultFileRenamePolicy());
 		
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/takeit/message.jsp");
+		String sellerId = multi.getParameter("sellerId");
+		String itemName = multi.getParameter("itemName");
+		int itemPrice = Integer.parseInt(multi.getParameter("itemPrice"));
+		String salesUnit = multi.getParameter("salesUnit");
 		
-		if (itemCategoryName == null || itemCategoryName.trim().length() == 0) {
-			MessageEntity messageEntity = new MessageEntity("validation", 6);
-			messageEntity.setLinkTitle("상품등록");
-			messageEntity.setUrl(CONTEXT_PATH + "/item/itemEnrollForm");
-			request.setAttribute("messageEntity", messageEntity);
-			dispatcher.forward(request, response);
-			return;
-		}    
-
+		String itemOrigin = multi.getParameter("itemOrigin");
+		int itemStock = Integer.parseInt(multi.getParameter("itemStock"));
+		String itemCategoryNo = multi.getParameter("itemCategoryNo");
+		String itemImg = multi.getFilesystemName(("itemImg"));
+		String itemTakeit = multi.getParameter("itemTakeit");
 		
-		if (sellerId == null || sellerId.trim().length() == 0) {
-			MessageEntity messageEntity = new MessageEntity("validation", 6);
-			messageEntity.setLinkTitle("상품등록");
-			messageEntity.setUrl(CONTEXT_PATH + "/item/itemEnrollForm");
-			request.setAttribute("messageEntity", messageEntity);
-			dispatcher.forward(request, response);
-			return;
-		}   
-
+		MessageEntity message = null;
+		ItemBiz biz = new ItemBiz();
 		
-		if (itemName == null || itemName.trim().length() == 0) {
-			MessageEntity messageEntity = new MessageEntity("validation", 6);
-			messageEntity.setLinkTitle("상품등록");
-			messageEntity.setUrl(CONTEXT_PATH + "/item/itemEnrollForm");
-			request.setAttribute("messageEntity", messageEntity);
-			dispatcher.forward(request, response);
-			return;
-		} 
 		
-		if (itemPrice == null || itemPrice.trim().length() == 0) {
-			MessageEntity messageEntity = new MessageEntity("validation", 6);
-			messageEntity.setLinkTitle("상품등록");
-			messageEntity.setUrl(CONTEXT_PATH + "/item/itemEnrollForm");
-			request.setAttribute("messageEntity", messageEntity);
-			dispatcher.forward(request, response);
-			return;
-		} 
 		
-		if (itemOrigin == null || itemOrigin.trim().length() == 0) {
-			MessageEntity messageEntity = new MessageEntity("validation", 6);
-			messageEntity.setLinkTitle("상품등록");
-			messageEntity.setUrl(CONTEXT_PATH + "/item/itemEnrollForm");
-			request.setAttribute("messageEntity", messageEntity);
-			dispatcher.forward(request, response);
-			return;
-	        
+		Item dto = new Item();
+		dto.setSellerId(sellerId);
+		dto.setItemName(itemName);
+		dto.setItemPrice(itemPrice);
+		dto.setSalesUnit(salesUnit);
+		dto.setItemOrigin(itemOrigin);
+		dto.setItemStock(itemStock);
+		dto.setItemImg(itemImg);
+		dto.setItemTakeit(itemTakeit);
+		dto.setItemCategoryNo(itemCategoryNo);
+		
+		Item dto2 = new Item();
+		
+		try {
+			
+			File file = new File(imgPath+"/takeit/img/item/"+dto.getItemImg());
+			if(file.exists() == false) {
+				System.out.println("등록된  이미지가 없습니다.");
+				return;
+			}
+			
+			biz.enrollItem(dto);
+			biz.getItemImgName(dto2);
+			
+			File newFile = new File(imgPath+"/takeit/img/item/"+dto2.getItemImg());
+			file.renameTo(newFile);
+			
+			if(newFile.exists() ==true) {
+				System.out.println("파일명이 성공적으로 변경되었습니다. 변경전 : " + dto.getItemImg() + "변경 후 : " + dto2.getItemImg() );
+			} else {
+				System.out.println("파일명 변경이 실패되었습니다.");
+			}
+			
+			if(dto.getItemName() != null) {
+				
+				message = new MessageEntity("success", 14);
+				message.setUrl("/takeit/item/itemController?action=itemList");
+				message.setLinkTitle("상품 리스트로");
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("/message.jsp").forward(request, response);;
+			} else {
+				
+				message = new MessageEntity("error", 7);
+				message.setLinkTitle("뒤로가기");
+				message.setUrl("/takeit/item/itemController?action=itemEnrollForm");
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("/message.jsp").forward(request, response);
+			}
+		}catch (Exception e) {
+			message = new MessageEntity("error", 7);
+			message.setLinkTitle("뒤로가기");
+			message.setUrl("/takeit/item/itemController?action=itemEnrollForm");
+			request.setAttribute("message", message);
+			request.getRequestDispatcher("/message.jsp").forward(request, response);;
+			
 		}
-	  		if (itemStock == null || itemStock.trim().length() == 0) {
-			MessageEntity messageEntity = new MessageEntity("validation", 6);
-				messageEntity.setLinkTitle("상품등록");
-				messageEntity.setUrl(CONTEXT_PATH + "/item/itemEnrollForm");
-				request.setAttribute("messageEntity", messageEntity);
-				dispatcher.forward(request, response);
-				return;   	
-	          
-	  		}
-	  		if (itemImg == null ) {
-				MessageEntity messageEntity = new MessageEntity("validation", 6);
-					messageEntity.setLinkTitle("상품등록");
-					messageEntity.setUrl(CONTEXT_PATH + "/item/itemEnrollForm");
-					request.setAttribute("messageEntity", messageEntity);
-					dispatcher.forward(request, response);
-					return;
-	  		} 
-			if (itemTakeIt == null || itemTakeIt.trim().length() == 0) {
-				MessageEntity messageEntity = new MessageEntity("validation", 6);
-				messageEntity.setLinkTitle("상품등록");
-				messageEntity.setUrl(CONTEXT_PATH + "/item/itemEnrollForm");
-				request.setAttribute("messageEntity", messageEntity);
-				dispatcher.forward(request, response);
-				return;
-			}	
-			if (packTypeName == null || packTypeName.trim().length() == 0) {
-				MessageEntity messageEntity = new MessageEntity("validation", 6);
-				messageEntity.setLinkTitle("상품등록");
-				messageEntity.setUrl(CONTEXT_PATH + "/item/itemEnrollForm");
-				request.setAttribute("messageEntity", messageEntity);
-				dispatcher.forward(request, response);
-				return;
-			}    
-			if (expirationDate == null || expirationDate.trim().length() == 0) {
-				MessageEntity messageEntity = new MessageEntity("validation", 6);
-				messageEntity.setLinkTitle("상품등록");
-				messageEntity.setUrl(CONTEXT_PATH + "/item/itemEnrollForm");
-				request.setAttribute("messageEntity", messageEntity);
-				dispatcher.forward(request, response);
-				return;
-			}    
-			if (notice == null || notice.trim().length() == 0) {
-				MessageEntity messageEntity = new MessageEntity("validation", 6);
-				messageEntity.setLinkTitle("상품등록");
-				messageEntity.setUrl(CONTEXT_PATH + "/item/itemEnrollForm");
-				request.setAttribute("messageEntity", messageEntity);
-				dispatcher.forward(request, response);
-				return;
-			}    
-			if (freshPercent == null || freshPercent.trim().length() == 0) {
-				MessageEntity messageEntity = new MessageEntity("validation", 6);
-				messageEntity.setLinkTitle("상품등록");
-				messageEntity.setUrl(CONTEXT_PATH + "/item/itemEnrollForm");
-				request.setAttribute("messageEntity", messageEntity);
-				dispatcher.forward(request, response);
-				return;
-			}       
 	          
 	}
-	//상품등록요청
+	/**
+	 * 상품 등록 요청 페이지
+	 */
 		protected void itemEnrollForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			String url = CONTEXT_PATH + "/item/itemEnroll.jsp";
-			response.sendRedirect(url); 
+			HttpSession session = request.getSession();
+			
+			MessageEntity message = null;
+			
+			ArrayList<Item> categoryList = new ArrayList<Item>();
+			ItemBiz biz = new ItemBiz();
+			
+			
+			try {
+				biz.getCategoryList(categoryList);
+				
+				System.out.println(categoryList);
+				
+				session.getAttribute("seller");
+				session.setAttribute("categoryList", categoryList);
+				request.getRequestDispatcher("/item/itemEnroll.jsp").forward(request, response);
+			}catch (CommonException e) {
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+				message = e.getMessageEntity();
+				request.setAttribute("message", message);
+				request.getRequestDispatcher("/message.jsp").forward(request, response);
+				
+			}
 		}
 
 		/**

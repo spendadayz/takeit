@@ -47,7 +47,7 @@ public class ItemBiz {
 		}
 	}
 
-	   /**
+	  /**
      * <pre>
 	 * 상품등록
 	 * -- 상품등록 입력 데이터 : 상품번호,상품카테고리이름,판매가,할인율,판매단위,재고량,원산지,포장타입,판매자,이미지,안내사항,유통기한,잇거래여부	
@@ -59,14 +59,60 @@ public class ItemBiz {
 
 	public void enrollItem(Item dto) throws CommonException{
 		Connection conn = JdbcTemplate.getConnection();
+		
 		try {
 			dao.addItem(conn, dto);
-		} catch(CommonException e) {
-			throw e; 
-		} finally {
+			JdbcTemplate.commit(conn);
+		}catch (Exception e) {
+			e.printStackTrace();
+			JdbcTemplate.rollback(conn);
+			throw e;
+		}finally {
 			JdbcTemplate.close(conn);
 		}
 	}
+	
+	/**
+	 * 이미지 파일 이름 변경
+	 * @param dto 상품 객체
+	 * @throws CommonException
+	 */
+	public void getItemImgName(Item dto) throws CommonException{
+		Connection conn = JdbcTemplate.getConnection();
+		
+		try {
+			dao.searchItemImgName(conn, dto);
+		}catch (Exception e) {
+			e.printStackTrace();
+			
+			throw e;
+		}finally {
+			JdbcTemplate.close(conn);
+		}
+		
+	}
+	
+	
+	/**
+	 * 카테고리 목록 조회
+	 * @param categoryList 카테고리 목록
+	 * @throws CommonException
+	 */
+	public void getCategoryList(ArrayList<Item> categoryList) throws CommonException{
+		
+		Connection conn = JdbcTemplate.getConnection(); 
+		try {
+			dao.getCategotyList(conn, categoryList);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}finally {
+			JdbcTemplate.close(conn);
+		}
+		
+	} 
+	
 	
 	/**상품삭제*/
 	public void deleteItem(String sellerId, String itemNo) throws CommonException{

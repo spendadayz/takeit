@@ -8,35 +8,34 @@ import java.io.Serializable;
  * </pre>
  * @author 김태경
  * @since jdk1.8
- * @version ver.1.0
+ * @version v2.0
  */
 public class TakeitItem extends Item implements Serializable {
-	
-	/**잇거래번호:필수*/
+	/** 잇거래번호 : 필수 */
 	private String takeitNo;
 	
-	/**모집금액:100만원,필수입력*/
+	/** 모집금액 : 필수 */
 	private int takeitPrice;
 	
-	/**현재 모집된 금액:필수*/
+	/**현재 모집된 금액 : 필수*/
 	private int takeitCurrPrice;
 	
-	/**모집시작일자:takeit등록일자 ,필수*/
+	/** 모집시작일자 : 필수*/
 	private String takeitDate;
 	
-	/**고객평점:DEFAULT 5.0,필수*/
+	/** 고객평점 : 필수 */
 	private double takeitCustScore;
 	
-	/**잇거래진행여부:DEFAULT 'T',필수*/
+	/** 잇거래진행여부 : 필수, ('T','F') */
 	private String takeitAlive;
 	
-	/**회원구역번호:(29번,30번),필수*/
+	/** 회원구역번호 : 필수 */
 	private String memberLocNo;
 	
-	/**상점구역코드:상점구역코드&회원구역 코드가 일치하면 잇거래 구매가능,필수*/
+	/** 상점구역코드 : 필수 */
 	private String shopLocCode;
 	
-	/**상점구역이름:AA,BB,필수 */
+	/** 상점구역이름 : 필수 */
 	private String shopLocName;
 
 	

@@ -96,6 +96,10 @@ table, tr, th, td {
 	display: inline-block;
 	margin-right: 5px;
 }
+#itemAsk{
+	display: inline-block;
+	margin-right: 5px;
+}
 .it_info{
 	line-height: 2;
 }

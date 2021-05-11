@@ -22,6 +22,21 @@ $(document).ready(function (){
 		$("#addCart-area").slideToggle(300);
 	});
 });
+
+</script>
+<script type="text/javascript">
+function gradeCheck(){
+	
+if(${memberId == null}){
+	alert('로그인 후 이용이 가능합니다.'); 
+	location.href="/takeit/member/memberLogin.jsp";
+	return;
+} else if(${memberId != null}){
+	location.href='/takeit/boardController?action=boardInputForm&itemNo=${item.itemNo}';
+return;
+	};
+
+}
 </script>
 </head>
 <!-- 상단 메뉴 -->
@@ -71,14 +86,15 @@ $(document).ready(function (){
 		</div>
 	</div>
 	<div class="btn-area">
+		<input type="button" class="link" id="itemAsk" value="상품문의" onclick=" return gradeCheck()"/>
 		<input type="button" class="link" id="addCart"  style="display: inline-block;" value="장바구니"/>
 		<form action="${CONTEXT_PATH}/order/orderController?action=orderForm"  method="post" style="display: inline-block;" id="buyItemForm">
-		<input type="hidden" value="${item.itemNo}" name="itemNo"> 
-		<input type="hidden" value="1" name="itemQty"> 
-		<input type="hidden" value="${realPrice}" name="itemPrice" > 
-		<input type="hidden" value="${realPrice}" name="totalPrice" > 
-		<input type="hidden" value="${realPrice}" name="cartTotalPrice" > 
-		<input type="button" class="link" style="display: inline-block;" value="구매" onclick="if(${sellerId != null}){alert('판매자는 구매할 수 없습니다'); return;};$('#buyItemForm').submit();"/>
+			<input type="hidden" value="${item.itemNo}" name="itemNo"> 
+			<input type="hidden" value="1" name="itemQty"> 
+			<input type="hidden" value="${realPrice}" name="itemPrice" > 
+			<input type="hidden" value="${realPrice+3500}" name="totalPrice" > 
+			<input type="hidden" value="${realPrice+3500}" name="cartTotalPrice" > 
+			<input type="button" class="link" style="display: inline-block;" value="구매" onclick="if(${sellerId != null}){alert('판매자는 구매할 수 없습니다'); return;};$('#buyItemForm').submit();"/>
 	</form>
 	</div>
 <!-- 장바구니 등록 -->

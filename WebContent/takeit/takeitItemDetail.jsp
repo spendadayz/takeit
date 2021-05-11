@@ -85,11 +85,14 @@ $(document).ready(function (){
 	$("#addCart-area").hide();
 	
 	$("#addCart").on("click",function(){
-		if(${dto == null}){
+		var isDto = ${dto == null} ;
+		var isSellerId = ${sellerId != null} ;
+		
+		if(isDto){
 			location.href='/takeit/cartController?action=addCart';
 			return;
 		}
-		if(${sellerId != null}){
+		if(isSellerId){
 			alert('판매자는 구매할 수 없습니다');
 			return;
 		}
@@ -99,6 +102,7 @@ $(document).ready(function (){
 
 </script>
 </head>
+<body>
 <!-- 상단 메뉴 -->
 <c:if test="${empty memberId and empty sellerId}">
 	<!-- 로그인 전 메뉴 -->
@@ -120,12 +124,14 @@ $(document).ready(function (){
 			<img id="takeit-detailImg" style="width:330px; height: 400px; " src="/takeit/img/item/${takeitItem.itemImg}">
 		</div>
 		<div class="desc takeit_detail_wrap">
+		
 			<fmt:formatNumber var="itemPrice" value="${takeitItem.itemPrice}" type="number"/>
 			<fmt:formatNumber var="discPrice" value="${takeitItem.itemPrice * (100-takeitItem.discRate) / 100}" type="number"/>
 			<fmt:parseNumber  var="intPrice" value="${(takeitItem.itemPrice * (100-takeitItem.discRate) / 100)/1000}" integerOnly="true"/>
 			<fmt:formatNumber var="takeitItemPrice" value="${intPrice*1000}" type="number"/>
 			<fmt:formatNumber var="itemDiscRate" value="${takeitItem.discRate / 100}" type="percent"/>
 			<fmt:formatNumber var="takeitDisc" value="${(takeitItem.itemPrice * (100-takeitItem.discRate) / 100) - intPrice*1000 }" type="number"/>
+			
 			<ul class="takeit_info">
 				<h2>${takeitItem.itemName} (<span id="takeitFresh" data-takeitexpdate="${takeitItem.freshPercent}"></span>)</h2>
 				<li style="list-style: none">
@@ -201,7 +207,7 @@ $(document).ready(function (){
 			</div>
 		</div>
 		<div id="addCart-btn-area">
-			<input type="submit" class="link" value="장바구니 추가" onclick="if(${dto == null}){return true;};if('${takeitItem.shopLocCode}' != '${dto.shopLocCode}'){alert('내 구역 상품만 구매할 수 있습니다'); return false}; return true; "/>
+			<input type="submit" class="link" value="장바구니 추가" onclick="if(${dto == null}){return true;};if('${takeitItem.shopLocCode}' != '${dto.shopLocCode}'){alert('내 구역 상품만 구매할 수 있습니다'); return false}; return true; ">
 		</div>
 	</form>
 	</div>

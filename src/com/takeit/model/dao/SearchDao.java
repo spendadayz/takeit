@@ -8,15 +8,14 @@ import java.util.ArrayList;
 
 import com.takeit.common.CommonException;
 import com.takeit.common.JdbcTemplate;
-import com.takeit.model.dto.Board;
-import com.takeit.model.dto.Item;
 import com.takeit.model.dto.MessageEntity;
 import com.takeit.model.dto.Search;
 
 /**
  * 상품검색 dao
- * @author 한소희
- *
+ * @author 	한소희
+ * @since	jdk1.8
+ * @version v2.0
  */
 public class SearchDao {
 	private static SearchDao instance = new SearchDao();

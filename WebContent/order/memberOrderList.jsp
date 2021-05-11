@@ -27,7 +27,7 @@ function orderCancelRequest(orderNo) {
 				$("#"+orderNo+"can").attr("disabled", true);
 				$("#"+orderNo+"message").html("(취소요청)");
 			} else {
-				alert("취소요청 실패");
+				alert("취소요청 실패"); 
 			}
 		}
 	});
@@ -38,6 +38,14 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
+<c:if test="${empty dto}">
+	<jsp:useBean id="message" class="com.takeit.model.dto.MessageEntity" scope="request" />
+	<jsp:setProperty property="type" name="message" value="message"/>
+	<jsp:setProperty property="index" name="message" value="0"/>
+	<jsp:setProperty property="url" name="message" value="${CONTEXT_PATH}/index"/>
+	<jsp:setProperty property="linkTitle" name="message" value="처음으로"/>
+	<jsp:forward page="/message.jsp"/>
+</c:if>
 
 <!-- 상단 메뉴 -->
 <c:if test="${empty memberId and empty sellerId}">
@@ -75,10 +83,10 @@ $(document).ready(function() {
 			<hr>
 			<c:choose>
 			<c:when test="${order.orderCancel == 'T' and order.orderCancelReq == 'T'}">
-			<div style="opacity:0.3;">
+				<div style="opacity:0.3;">
 			</c:when>
 			<c:otherwise>
-			<div>
+				<div>
 			</c:otherwise>
 			</c:choose>
 				<div class="order-info">
@@ -115,23 +123,33 @@ $(document).ready(function() {
 					<div class="order-detail">
 						<span><b>상품명 :</b>&emsp;${orderDetail.itemName}</span><br>
 						<span><b>상품 수량 :</b> &emsp;${orderDetail.itemQty}개</span><br>
-						<span><b>결제금액 :</b> &emsp;<fmt:formatNumber type="number" value="${orderDetail.itemPayPrice * orderDetail.itemQty}"/>원</span><br>
+					<c:choose>
+						<c:when test='${orderDetail.itemTakeit == "T" }'>
+							<span><b>결제금액 :</b> &emsp;<fmt:formatNumber type="number" value="${orderDetail.itemPayPrice * orderDetail.itemQty}"/>원</span><br>
+						</c:when>
+						<c:when test='${orderDetail.itemTakeit == "F" && (orderDetail.itemPayPrice * orderDetail.itemQty >= 50000) }'>
+							<span><b>결제금액 :</b> &emsp;<fmt:formatNumber type="number" value="${orderDetail.itemPayPrice * orderDetail.itemQty}"/>원</span><br>
+						</c:when>
+						<c:otherwise>
+							<span><b>결제금액 :</b> &emsp;<fmt:formatNumber type="number" value="${orderDetail.itemPayPrice * orderDetail.itemQty + 3500}"/>원</span><br>
+						</c:otherwise>
+					</c:choose>
+						
 						<span><b>수령 방법 :</b> &emsp;${order.receiveMethod}</span><br>
 						<span>${order.shopName}(${order.sellerId})</span>
 					</div>
 					<div class="order-detail-btn">
-						<input type="button" value="상품 후기" class="order-btn"  style="margin-bottom: 5px;" onclick="location.href='/takeit/item/reviewController?action=enrollReviewForm&sellerId=${memberId}&itemNo=${order.orderNo}'">
-						<input type="button" value="상품 문의" class="order-btn" onclick="location.href='/takeit/boardController?action=boardList&boardCategory=3'">
+						<input type="button" value="상품 후기" class="order-btn"  style="margin-bottom: 5px;" onclick="location.href='/takeit/item/reviewController?action=enrollReviewForm&itemNo=${orderDetail.itemNo}'">
+						<input type="button" value="상품 문의" class="order-btn" onclick="location.href='/takeit/boardController?action=boardInputForm&itemNo=${orderDetail.itemNo}'">
 					</div>
 				</div>
 				<hr style=" border-top: 1px dashed grey;">
 				</c:forEach>
 			</div>
-		<hr>
 		</c:forEach>
+		<hr>
 	</div>
 </div>
-
 <!-- floating Banner -->
 <jsp:include page="/common/floatingBanner.jsp"></jsp:include>
  <!-- scroll function -->

@@ -5,14 +5,19 @@ package com.takeit.model.dto;
 
 /**
  * 게시글 카테고리
- * @author 한소희
+ * @author 	한소희
+ * @since	jdk1.8
+ * @version v2.0
  */
 public class Category {
 	/** 게시글 카테고리 번호(1|공지사항. 2|자주하는질문, 3|상품문의) */
 	private String categoryNo;
+	
 	/** 게시글 카테고리명 */
 	private String categoryName;
 	
+	
+	/** 기본 생성자 */
 	public Category() {}
 
 	/***
@@ -61,6 +66,4 @@ public class Category {
 		builder.append(categoryName);
 		return builder.toString();
 	}
-	
-	
 }

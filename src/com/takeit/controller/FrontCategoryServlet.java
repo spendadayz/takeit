@@ -3,25 +3,24 @@ package com.takeit.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.takeit.common.CommonException;
 import com.takeit.model.biz.ItemBiz;
 import com.takeit.model.dto.Item;
 import com.takeit.model.dto.MessageEntity;
-import com.takeit.model.dto.Paging;
 
 
 /**
  * 카테고리에 따른 상품관리를 위한 FrontController servlet
- * @author 한소희
+ * @author 	한소희
+ * @since	jdk1.8
+ * @version v2.0
  */
 @WebServlet("/categoryController")
 public class FrontCategoryServlet extends HttpServlet {

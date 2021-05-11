@@ -12,20 +12,20 @@
 <link type="text/css" rel="stylesheet" href="/takeit/css/board.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript">
-function valueIsNull(){
-	var inputVal = $("#searchInput").val();
-	if(inputVal == ""){
-		$("#board-searchInput").focus();
-		return false;
-	} else {
-		return true;
-	}
-}
-
 $(document).ready(function(){
 	$("#go").on("click",function(){
 		$("#go").attr("style", "color: #fe4b03")
 	});
+	
+	function valueIsNull(){
+		var inputVal = $("#searchInput").val();
+		if(inputVal == ""){
+			$("#board-searchInput").focus();
+			return false;
+		} else {
+			return true;
+		}
+	}
 });
 	
 </script>
@@ -100,7 +100,7 @@ $(document).ready(function(){
 		<td>${dto.boardViews}</td>
 		<td>${dto.boardDate}</td>
 	</tr>
-	</c:forEach>
+	</c:forEach> 
 </table>
 <!-- 게시글 검색 -->
 <div id="boardSearch-area">
@@ -114,7 +114,6 @@ $(document).ready(function(){
 	<input type="search" name="searchInput" id="board-searchInput" class="searchInput" placeholder="검색어를 입력하세요.." style="border: 1px solid grey; height: 25px;">
 	<input type="submit" class="searchInput" id="searchInput-btn" value="검색" onclick="return valueIsNull(); ">
 	</form>
-	
 </div>
 
 <!-- 페이징 -->

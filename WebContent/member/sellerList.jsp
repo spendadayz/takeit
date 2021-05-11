@@ -25,12 +25,13 @@
 <!-- 네비게이션 -->
 <jsp:include page="/common/navigation.jsp"></jsp:include>
 <br>
+<div id="list-container" class="list-view-width">
+<div id="memberList">
 	<h1 style="width:fit-content; margin: 0 auto;">판매자 회원 목록</h1>
 	<br>
 	<table id="memberList_table">
 		<tr>
 			<th>아이디</th>
-			<th>비밀번호</th>
 			<th>이름</th>
 			<th>사업자등록번호</th>
 			<th>상점명</th>
@@ -42,7 +43,6 @@
 			<th>우편번호</th>
 			<th>주소</th>
 			<th>상점구역코드</th>
-			<th>카카오톡아이디</th>
 			<th>등급</th>
 			<th>탈퇴</th>
 		</tr>
@@ -50,9 +50,6 @@
 		<tr>
 			<td>
 				${ dto.getSellerId()}
-			</td>
-			<td>
-				${ dto.getSellerPw()}
 			</td>
 			<td>
 				${ dto.getName()}
@@ -88,9 +85,6 @@
 				${ dto.getShopLocCode()}
 			</td>
 			<td>
-				${ dto.getShopKakaoId()}
-			</td>
-			<td>
 				${ dto.getGrade()}
 			</td>
 			<td>
@@ -100,7 +94,8 @@
 		</c:forEach>
 	</table>
 <a href="${CONTEXT_PATH}/member/myPage.jsp" id="mypage_Btn">마이페이지로 이동</a>
-
+</div>
+</div>
  <!-- footer 구역 -->
 <jsp:include page="/common/footer.jsp"></jsp:include>
 </body>

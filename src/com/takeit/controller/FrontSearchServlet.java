@@ -17,7 +17,9 @@ import com.takeit.model.dto.Search;
 
 /**
  * 게시판 관리 컨트롤러
- * @author 한소희
+ * @author 	한소희
+ * @since	jdk1.8
+ * @version v2.0
  */
 @WebServlet("/searchController")
 public class FrontSearchServlet extends HttpServlet {

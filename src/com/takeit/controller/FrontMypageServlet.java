@@ -1,6 +1,5 @@
 package com.takeit.controller;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -12,12 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.takeit.common.CommonException;
-import com.takeit.model.biz.ItemBiz;
 import com.takeit.model.biz.MypageBiz;
-import com.takeit.model.dto.Item;
 import com.takeit.model.dto.Member;
 import com.takeit.model.dto.MessageEntity;
 import com.takeit.model.dto.Seller;
@@ -25,6 +20,8 @@ import com.takeit.model.dto.Seller;
 /**
  * 마이페이지 관리 컨트롤러
  * @author 심선경
+ * @since jdk1.8
+ * @version v2.0
  */
 @WebServlet("/member/mypageController")
 public class FrontMypageServlet extends HttpServlet {
@@ -33,10 +30,12 @@ public class FrontMypageServlet extends HttpServlet {
     
 	public ServletContext application;
 	public String CONTEXT_PATH;
-	
+	public String imgPath;
 	public void init() {
 		application = getServletContext();
-		CONTEXT_PATH = (String) application.getAttribute("CONTEXT_PATH");	
+		CONTEXT_PATH = (String) application.getAttribute("CONTEXT_PATH");
+		String imgPath = "C:/student_ucamp33/apps_down/05.tomcat/apache-tomcat-8.5.64/webapps";
+		application.setAttribute("imgPath", imgPath);
 	}	
 	
 	
@@ -74,15 +73,6 @@ public class FrontMypageServlet extends HttpServlet {
 		case "setSellerPw":
 			setSellerPw(request,response);
 			break;
-		case "itemaddForm":
-			itemaddForm(request,response);
-			break;
-		case "itemList":
-			itemList(request,response);
-			break;
-		case "itemadd":
-			itemadd(request,response);
-			break;
 		case "memberList":
 			memberList(request,response);
 			break;
@@ -112,7 +102,7 @@ public class FrontMypageServlet extends HttpServlet {
 	}
 	
 	/**
-	 * 판매자 회원 전체 조회
+	 * 판매자 회원 전체 조회 서비스
 	 */
 	protected void sellerList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -142,7 +132,7 @@ public class FrontMypageServlet extends HttpServlet {
 	}
 	
 	/**
-	 * 일반회원 전체 조회
+	 * 일반회원 전체 조회 서비스
 	 */
 	protected void memberList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -170,160 +160,24 @@ public class FrontMypageServlet extends HttpServlet {
 		}
 	}
 	
+	
+	
 	/**
-	 * 상품 등록 페이지 요청 폼
+	 * 회원 탈퇴 요청 페이지 서비스
 	 */
-	protected void itemaddForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HttpSession session = request.getSession();
-		
-		MessageEntity message = null;
-		
-		ArrayList<Item> categoryList = new ArrayList<Item>();
-		MypageBiz biz = new MypageBiz();
-		
+	protected void removeMemberForm (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			biz.getCategoryList(categoryList);
-			
-			System.out.println(categoryList);
-			
-			session.getAttribute("seller");
-			session.setAttribute("categoryList", categoryList);
-			request.getRequestDispatcher("/member/itemadd.jsp").forward(request, response);
-		}catch (CommonException e) {
+			request.getRequestDispatcher("/member/memberRemove.jsp").forward(request, response);
+		}catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			message = e.getMessageEntity();
-			request.setAttribute("message", message);
-			request.getRequestDispatcher("/message.jsp").forward(request, response);
-			
 		}
-	}
-	
-	/**
-	 * 상품 등록
-	 */
-	protected void itemadd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String directory = "C:/student_ucamp33/workspace_takeit/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/takeit/img/item";
-		int maxSize = 1024 * 1024 * 100;
-		String encoding = "UTF-8";
-		System.out.println(directory);
-		MultipartRequest multi
-		= new MultipartRequest(request, directory, maxSize, encoding,
-				new DefaultFileRenamePolicy());
-		
-		
-		String sellerId = multi.getParameter("sellerId");
-		String itemName = multi.getParameter("itemName");
-		int itemPrice = Integer.parseInt(multi.getParameter("itemPrice"));
-		String salesUnit = multi.getParameter("salesUnit");
-		
-		String itemOrigin = multi.getParameter("itemOrigin");
-		int itemStock = Integer.parseInt(multi.getParameter("itemStock"));
-		String itemCategoryNo = multi.getParameter("itemCategoryNo");
-		String itemImg = multi.getFilesystemName(("itemImg"));
-		String itemTakeit = multi.getParameter("itemTakeit");
-		
-		MessageEntity message = null;
-		MypageBiz biz = new MypageBiz();
-		
-		Item dto = new Item();
-		dto.setSellerId(sellerId);
-		dto.setItemName(itemName);
-		dto.setItemPrice(itemPrice);
-		dto.setSalesUnit(salesUnit);
-		dto.setItemOrigin(itemOrigin);
-		dto.setItemStock(itemStock);
-		dto.setItemImg(itemImg);
-		dto.setItemTakeit(itemTakeit);
-		dto.setItemCategoryNo(itemCategoryNo);
-		
-		Item dto2 = new Item();
-		
-		try {
-			
-			File file = new File("C:/student_ucamp33/workspace_takeit/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/takeit/img/item/"+dto.getItemImg());
-			if(file.exists() == false) {
-				System.out.println("등록된  이미지가 없습니다.");
-				return;
-			}
-			
-			biz.addItem(dto);
-			biz.getItemImgName(dto2);
-			
-			File newFile = new File("C:/student_ucamp33/workspace_takeit/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/takeit/img/item/"+dto2.getItemImg());
-			file.renameTo(newFile);
-			
-			if(newFile.exists() ==true) {
-				System.out.println("파일명이 성공적으로 변경되었습니다. 변경전 : " + dto.getItemImg() + "변경 후 : " + dto2.getItemImg() );
-			} else {
-				System.out.println("파일명 변경이 실패되었습니다.");
-			}
-			
-			if(dto.getItemName() != null) {
-				
-				message = new MessageEntity("success", 14);
-				message.setUrl("/takeit/member/mypageController?action=itemList");
-				message.setLinkTitle("상품 리스트로");
-				request.setAttribute("message", message);
-				request.getRequestDispatcher("/message.jsp").forward(request, response);;
-			} else {
-				
-				message = new MessageEntity("error", 7);
-				message.setLinkTitle("뒤로가기");
-				message.setUrl("/takeit/member/mypageController?action=itemaddForm");
-				request.setAttribute("message", message);
-				request.getRequestDispatcher("/message.jsp").forward(request, response);
-			}
-		}catch (Exception e) {
-			message = new MessageEntity("error", 7);
-			message.setLinkTitle("뒤로가기");
-			message.setUrl("/takeit/member/mypageController?action=itemaddForm");
-			request.setAttribute("message", message);
-			request.getRequestDispatcher("/message.jsp").forward(request, response);;
-			
-		}
-	}
-	
-	/**
-	 * 상품전체조회
-	 */
-	protected void itemList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		ArrayList<Item> itemList = new ArrayList<Item>();
-		ItemBiz biz = new ItemBiz();
-		try {
-			biz.getItemList(itemList);
-			if(itemList != null) {
-				request.setAttribute("itemList",itemList);
-				request.getRequestDispatcher("/item/newItem.jsp").forward(request, response);
-			}
-		} catch (CommonException e) {
-			MessageEntity message = new MessageEntity("error", 24);
-			request.setAttribute("message", message);
-			request.getRequestDispatcher("/message.jsp").forward(request, response);
-		}
-	
-}
-	
-	
-	/**
-	 * 회원 탈퇴 요청 페이지
-	 */
-		protected void removeMemberForm (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-			try {
-				request.getRequestDispatcher("/member/memberRemove.jsp").forward(request, response);
-			}catch (Exception e) {
-				System.out.println(e.getMessage());
-				e.printStackTrace();
-			}
-		} 
+	} 
 		
 		
 	/**
-	 * 회원 탈퇴 판매자 
+	 * 회원 탈퇴 판매자  서비스
 	 */
 	protected void removeSeller (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -397,7 +251,7 @@ public class FrontMypageServlet extends HttpServlet {
 	} 
 	
 	/**
-	 * 비밀번호 변경 요청 페이지
+	 * 비밀번호 변경 요청 페이지 서비스
 	 */
 	protected void memberPwUpdateForm (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -415,7 +269,7 @@ public class FrontMypageServlet extends HttpServlet {
 	
 	
 	/**
-	 * 비밀번호 변경 판매자
+	 * 비밀번호 변경 판매자 서비스
 	 */
 	protected void setSellerPw (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
@@ -493,7 +347,7 @@ public class FrontMypageServlet extends HttpServlet {
 	} 
 	
 	/**
-	 * 판매자 정보 수정 
+	 * 판매자 정보 수정 서비스
 	 */
 	protected void setSellerInfo (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -706,7 +560,7 @@ public class FrontMypageServlet extends HttpServlet {
 	
 	
 	/**
-	 * 판매자 정보 조회 
+	 * 판매자 정보 조회 서비스
 	 */
 	protected void sellerInfoForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -749,7 +603,7 @@ public class FrontMypageServlet extends HttpServlet {
 	}
 	
 	/**
-	 * 괸리자 > 회원 탈퇴 일반회원
+	 * 괸리자 > 회원 탈퇴 일반회원서비스
 	 */
 	protected void AceRemoveMember (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -807,7 +661,7 @@ public class FrontMypageServlet extends HttpServlet {
 	} 
 	
 	/**
-	 * 괸리자 > 회원 탈퇴 판매자
+	 * 괸리자 > 회원 탈퇴 판매자 서비스
 	 */
 	protected void AceRemoveSeller (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -866,7 +720,7 @@ public class FrontMypageServlet extends HttpServlet {
 	
 	
 	/**
-	 * 회원 탈퇴 일반회원
+	 * 회원 탈퇴 일반회원 서비스
 	 */
 	protected void removeMember (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -941,7 +795,7 @@ public class FrontMypageServlet extends HttpServlet {
 	
 	
 	/**
-	 * 비밀번호 변경 일반회원
+	 * 비밀번호 변경 일반회원 서비스
 	 */
 	protected void setMemberPw (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -1020,8 +874,8 @@ public class FrontMypageServlet extends HttpServlet {
 	
 		
 		
-	/**
-	 * 일반회원 내 정보 수정  
+	/** 
+	 * 일반회원 내 정보 수정   서비스
 	 */
 	protected void setMemberInfo (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -1186,7 +1040,7 @@ public class FrontMypageServlet extends HttpServlet {
 		
 		
 	/**
-	 * 일반회원 내 정보 조회
+	 * 일반회원 내 정보 조회 서비스
 	 */
 	protected void memberInfoForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
